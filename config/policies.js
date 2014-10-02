@@ -16,7 +16,7 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': ['safari304', 'setUserLocale', 'isAuthenticated', 'isConfigure'],
+  '*': ['safari304', 'setUserLocale', 'isAuthenticated', 'isConfigure', 'isIE'],
 
 
   SetupController: {

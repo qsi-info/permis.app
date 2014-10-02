@@ -1,5 +1,5 @@
 /**
- * AdminController
+ * LangController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -17,27 +17,24 @@
 
 module.exports = {
     
-  
-	index: function (req, res) {
-		return res.view({ layout: 'admin.layout.ejs' });
-	},
+  switch: function (req, res) {
+  	var lang = req.param('lang');
+  	var url = decodeURIComponent(req.param('url'));
+  	res.cookie(sails.config.i18n.cookie, lang);
+  	return res.redirect(url);
+  },
+ 
 
-	uninstall: function (req, res) {
-		User.query("DROP TABLE " + Settings._tableName, function (err) {
-			if (err) return console.log(err);
-			User.query("DROP TABLE " + User._tableName, function (err) {
-				if (err) return console.log(err);
-				delete sails.settings;
-				return res.redirect('/admin')
-			})
-		})
-	},
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to AdminController)
+   * (specific to LangController)
    */
-  _config: {}
+  _config: {
+    blueprints: {
+      rest: false,
+    }
+  }
 
   
 };
