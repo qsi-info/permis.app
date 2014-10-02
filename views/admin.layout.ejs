@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="<%= req.cookies[sails.config.i18n.cookie] || sails.config.i18n.defaultLocale %>">
+  <head>
+    <title><%- title %></title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/themes/bootstrap/yeti.css"/>
+    <link rel="stylesheet" href="/linker/styles/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/linker/styles/parsley.plugin.css"/>
+    <link rel="stylesheet" href="/linker/styles/main.css"/>
+  </head>
+
+  <body>
+
+    <div id="wrap">
+      <%- partial('./partials/admin.header.ejs') %>
+      <%- body %>
+    </div>
+
+
+
+    <script src="/linker/js/socket.io.js"></script>
+    <script src="/linker/js/sails.io.js"></script>
+    <script src="/linker/js/app.js"></script>
+    <script src="/linker/js/jquery.min.js"></script>
+    <script src="/linker/js/jquery.cookie.js"></script>
+    <script src="/linker/js/bootstrap.min.js"></script>
+    <script src="/linker/js/handlebars-v2.0.0.js"></script>
+    <script src="/linker/js/monent.js"></script>
+    <script src="/linker/js/parsley.min.js"></script>
+
+    <script type="text/javascript" src="/js/parsley/i18n/<%= req.cookies[sails.config.i18n.cookie] || sails.config.i18n.defaultLocale %>.js"></script>
+
+
+
+  </body>
+</html>

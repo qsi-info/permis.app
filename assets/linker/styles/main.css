@@ -1,0 +1,64 @@
+html,
+body {
+	/*height: 100%;*/
+}
+
+#wrap {
+	padding-top: 75px;
+	padding-bottom: 50px;
+
+}
+
+.footer {
+	border-top: 1px solid black;
+	padding: 20px 0px;
+	text-align: center;
+}
+
+
+
+
+/* CUSTOM CLASS */
+.p-10 {
+	padding: 10px !important;
+}
+
+
+
+
+/* METRO FIX */
+.metro .badge {
+	border-radius: 0px !important;
+	background-color: transparent !important;
+}
+
+.metro .tile .fa {
+	font-family: FontAwesome !important;
+}
+
+.metro .tile .tile-content.icon [class*="fa-"], .metro .tile .tile-content.fa img {
+  color: #ffffff;
+  font-size: 48px;
+  height: 56px;
+  left: 50%;
+  line-height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 56px;
+}
+
+
+.metro .listview-outlook .list:focus .list-content {
+  border-left: 3px solid #0067b0 !important;
+}
+
+
+
+.metro .fluent-menu .tabs-content {
+  /*height: 100% !important;*/
+}
+
+

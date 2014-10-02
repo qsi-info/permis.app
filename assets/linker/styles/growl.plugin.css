@@ -1,0 +1,14 @@
+.growl-animated {
+  border-radius: 0px !important;
+  min-width: 200px;
+}
+
+.growl-animated.alert-success {
+  color: white;
+  background: rgb(0,121,154);
+}
+
+.growl-animated.alert-warning {
+  color: white;
+  background: rgb(230,69,21);
+}
