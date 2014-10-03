@@ -1,0 +1,100 @@
+<div class="container">
+
+	<div class="row metro breadcrumbs">
+		<div class="col-sm-12">
+			<h2>
+				<a href="/admin"><%= __('Admin') %></a> > 
+				<a href="javascript:;"><%= __('Theme') %></a>
+			</h2>
+		</div>
+	</div>
+
+
+
+	<form method="post" action="/admin/settings/update" data-parsley-validate="" id="setupForm">
+
+
+		<div class="row">
+			<div class="col-sm-6">
+
+				<fieldset>
+					<legend>Application design</legend>
+					
+					<div class="form-group">
+						<label><%= __('App.Name.Label') %></label>
+						<input type="text" 
+									 class="form-control" 
+									 name="app_name" 
+									 required=""
+									 value="<%= sails.settings.app_name %>"/>
+					</div>
+
+					<div class="form-group">
+						<label><%= __('App.Theme.Label') %></label>
+						<select name="app_theme" class="form-control" required="">
+						<% sails.config.themes.forEach(function (theme) { %> 
+							<% if (sails.settings.app_theme == theme) { %>
+							<option value="<%= theme %>" selected="selected"><%= theme %></option>
+							<% } else { %>
+							<option value="<%= theme %>"><%= theme %></option>
+							<% } %>
+						<% }) %>
+						</select>
+					</div>
+
+				</fieldset>
+			</div>
+
+		</div>
+
+		<div>	
+			<div class="col-sm-12">
+				<div class="pull-right">
+				  <button type="reset" id="reset" class="btn btn-danger">Reset</button>
+				  <button type="submit" id="submitSettingsButton" class="btn btn-success">Submit</button>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+</div>
+
+
+
+<script type="text/x-handlebars-template" class="__CONFIRM_UPDATE_SETTINGS__" lang="fr">
+	Etes-vous certain de vouloir modifier les réglages de l&apos;application, le Red&eacute;marrage des instances <i>node</i> sera requis afin de voir les effets complets de vos modifications.
+</script>
+
+<script type="text/x-handlebars-template" class="__CONFIRM_UPDATE_SETTINGS__" lang="en">
+	Are you certain you want to update the settings. You will need to restart your node instances to see the full effects of your changes.
+</script>
+
+
+
+<script type="text/javascript">
+window.addEventListener('load', function () {
+
+
+	$('#submitSettingsButton').on('click', function (e) {
+		e.preventDefault();
+		var confirmForm = new qsi.confirm();
+		confirmForm.setMessage('.__CONFIRM_UPDATE_SETTINGS__');
+		confirmForm.setConfirm(function () {
+			$('#setupForm').submit();
+		});
+		confirmForm.show();
+	})
+
+
+})
+</script>
+
+
+
+
+
+
+
+
+

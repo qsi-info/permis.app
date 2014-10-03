@@ -19,8 +19,10 @@ module.exports.bootstrap = function (cb) {
 			Settings.findOne(1)
 			.then(function (settings) {
 				if (!settings) return cb();	
-				sails.settings = settings;
-				ldap.configure(settings);
+				setup(settings);
+				// sails.settings = settings;
+				// sails.config.appName = settings.app_name;
+				// ldap.configure(settings);
 				return cb();				
 			})
 		} else {

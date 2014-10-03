@@ -28,6 +28,19 @@
 
 
 
+			<a href="/admin/theme">
+				<div class="tile bg-yellow">
+				  <div class="tile-content icon">
+				  	<i class="fa fa-paint-brush"></i>
+				  </div>
+				  <div class="tile-status">
+				    <span class="name"><%= __('Design') %></span>
+				  </div>
+				</div>
+			</a>	  
+	  
+
+
 			<a href="/admin/settings">
 				<div class="tile bg-green">
 				  <div class="tile-content icon">
@@ -88,7 +101,13 @@ window.addEventListener('load', function () {
 			window.location.href = '/admin/uninstall';
 		});
 		uninstallConfirm.show();
-	})
+	});
+
+	// $('.tile').hover(function () {
+	// 	$(this).addClass('selected');
+	// }, function () {
+	// 	$(this).removeClass('selected');
+	// })
 
 })
 </script>

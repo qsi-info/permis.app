@@ -1,0 +1,23 @@
+module.exports.themes = [
+
+	'bootstrap/cerulean',
+	'bootstrap/cosmo',
+	'bootstrap/cyborg',
+	'bootstrap/darkly',
+	'bootstrap/default',
+	'bootstrap/journal',
+	'bootstrap/lumen',
+	'bootstrap/paper',
+	'bootstrap/readable',
+	'bootstrap/sandstone',
+	'bootstrap/amelia',
+	'bootstrap/love',
+	'bootstrap/shamrock',
+	'bootstrap/bureau',
+	'bootstrap/simplex',
+	'bootstrap/slate',
+	'bootstrap/spacelab',
+	'bootstrap/united',
+	'bootstrap/yeti',
+	'bootstrap/superhero',
+]

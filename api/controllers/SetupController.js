@@ -25,8 +25,9 @@ module.exports = {
   configure: function (req, res) {
   	Settings.create(req.body)
   	.then(function (settings) {
-  		sails.settings = settings;
-  		ldap.configure(settings);
+      setup(settings);
+  		// sails.settings = settings;
+  		// ldap.configure(settings);
   		return res.redirect('/admin');
   	})
   	.fail(function (err) {

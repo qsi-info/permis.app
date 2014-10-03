@@ -58,6 +58,18 @@ module.exports = {
 			defaultsTo: ''
 			// defaultsTo: 'password',
 		},
+
+
+		// App settings
+		app_name: {
+			type: 'string',
+			defaultsTo: 'QSI - Base App',
+		},
+
+		app_theme: {
+			type: 'string',
+			defaultsTo: 'bootstrap/default',
+		},
     
   }
 

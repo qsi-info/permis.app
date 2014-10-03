@@ -29,7 +29,8 @@ module.exports = {
 	updateSettings: function (req, res) {
 		Settings.update(1, req.body)
 		.then(function (settings) {
-			sails.settings = settings[0];
+			setup(settings[0]);
+			// sails.settings = settings[0];
 			return res.redirect('/admin');
 		})
 		.fail(function (err) {
@@ -44,6 +45,11 @@ module.exports = {
 		.then(function (users) {
 			return res.view({ users: users, layout: 'admin.layout.ejs' });
 		})
+	},
+
+
+	theme: function (req, res) {
+		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
 	uninstall: function (req, res) {
