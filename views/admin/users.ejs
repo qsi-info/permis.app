@@ -1,5 +1,5 @@
 <div class="container metro">
-	<div class="row">
+	<div class="row breadcrumbs">
 		<div class="col-sm-12">
 			<h2>
 				<a href="/admin"><%= __('Admin') %></a> > 
@@ -33,21 +33,47 @@
 </div>
 
 
+<%- partial('./partials/modal.user.edit.ejs') %>
+
 
 <script type="text/javascript">
 window.addEventListener('load', function () {
 
-	// $('.user-link').on('click', function (e) {
-	// 	e.preventDefault();
-	// 	socket.get('/user/' + $(this).attr('data-user') , function (user) {
-	// 		$modal = $('#ModalUserEdit');
-	// 		// $modal.find('.modal-content').html(Handlebars.compile($('#__USER_EDIT_TEMPLATE__').html())(user));
-	// 		$modal.modal('show');
-	// 	})
-	// })
+	$('.user-link').on('click', function (e) {
+		e.preventDefault();
+		socket.get('/user/' + $(this).attr('data-user') , function (user) {
+			console.log(user);
+			$modal = $('#ModalUser');
+			$modal.html(Handlebars.compile($('#__MODAL_USER_EDIT__').html())(user));
+			$modal.modal('show');
+		})
+	});
+
+
+	$('body').on('click', '#userEditSubmitButton', function (e) {
+		e.preventDefault()
+		var $form = $('#userEditForm');
+		if ($form.attr('data-id') == 1) {
+			return window.alert('Cannot change admin');
+		}
+		var action = $form.attr('action');
+		var updateValues = {
+			permission_level: $form.find('[name="permission_level"]').val(),
+			displayName: $form.find('[name="displayName"]').val(),
+			mail: $form.find('[name="mail"]').val(),
+		};
+
+		$('body').addClass('loading');
+		socket.put(action, updateValues, function (response) {
+			window.location.reload();
+		})
+
+	})
 
 })
 </script>
+
+
 
 
 

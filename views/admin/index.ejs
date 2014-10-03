@@ -1,6 +1,6 @@
 <div class="container">
 
-	<div class="row metro">
+	<div class="row metro breadcrumbs">
 		<div class="col-sm-12">
 			<h2>
 				<a href="javascript:;"><%= __('Admin') %></a>
@@ -10,18 +10,8 @@
 
 	<div class="row metro">
 		<div class="col-sm-12">
-			<a href="/admin/settings">
-				<div class="tile bg-green">
-				  <div class="tile-content icon">
-				  	<i class="icon-cog"></i>
-				  </div>
-				  <div class="tile-status">
-				    <span class="name"><%= __('Settings') %></span>
-				  </div>
-				</div>
-			</a>	  
-	  
-	    
+
+
 			<a href="/admin/users">
 				<div class="tile double bg-cyan">
 				  <div class="tile-content icon">
@@ -34,6 +24,22 @@
 				</div>
 			</a>
 
+
+
+
+
+			<a href="/admin/settings">
+				<div class="tile bg-green">
+				  <div class="tile-content icon">
+				  	<i class="icon-cog"></i>
+				  </div>
+				  <div class="tile-status">
+				    <span class="name"><%= __('Settings') %></span>
+				  </div>
+				</div>
+			</a>	  
+	  
+	    
 			<a href="javascript:;" id="uninstall">
 				<div class="tile bg-orange">
 				  <div class="tile-content icon">

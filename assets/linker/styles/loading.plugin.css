@@ -6,7 +6,7 @@ our animation centered, and no-repeating */
 .modal-loading {
 display: none;
 position: fixed;
-z-index: 1000;
+z-index: 90000;
 top: 0;
 left: 0;
 height: 100%;

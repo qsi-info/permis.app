@@ -46,7 +46,15 @@ module.exports = {
 	  	type: 'string',
 	  	enum: ['ldap', 'local'],
 	  	required: true,
-	  }
+	  },
+
+    // Override toJSON method to remove password from API
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
+    }
+	  
   },
 
 

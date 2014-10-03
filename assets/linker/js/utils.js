@@ -345,6 +345,15 @@ qsi.confirm = function () {
 
 
 
+Handlebars.registerHelper('selected', function(option, value){
+    if (option === value) {
+        return ' selected';
+    } else {
+        return ''
+    }
+});
+
+
 
 
 
