@@ -14,7 +14,8 @@
     "passport-local": "^1.0.0",
     "sails": "0.9.17",
     "sails-disk": "~0.9.0",
-    "sails-mssql": "git://github.com/alexandrepage/sails-mssql-update-fix"
+    "sails-mssql": "git://github.com/alexandrepage/sails-mssql-update-fix",
+    "sails-redis": "^0.10.3"
   },
   "scripts": {
     "start": "node app.js",
