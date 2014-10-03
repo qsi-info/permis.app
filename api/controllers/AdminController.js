@@ -22,13 +22,25 @@ module.exports = {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
+	settings: function (req, res) {
+		return res.view({ layout: 'admin.layout.ejs' });
+	},
+
+	users: function (req, res) {
+		User.find()
+		.sort('account')
+		.then(function (users) {
+			return res.view({ users: users, layout: 'admin.layout.ejs' });
+		})
+	},
+
 	uninstall: function (req, res) {
 		User.query("DROP TABLE " + Settings._tableName, function (err) {
 			if (err) return console.log(err);
 			User.query("DROP TABLE " + User._tableName, function (err) {
 				if (err) return console.log(err);
 				delete sails.settings;
-				return res.redirect('/admin')
+				return res.view({ layout: 'auth.layout.ejs' });
 			})
 		})
 	},

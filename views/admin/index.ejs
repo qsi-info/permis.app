@@ -28,11 +28,24 @@
 				  	<i class="fa fa-users"></i>
 				  </div>
 				  <div class="tile-status">
-				    <span class="name"><%= __('Users') %></span>
+				    <span class="name"><%= __('Users and Permissions') %></span>
 			      <div class="badge bg-red hidden" id="userCount"></div>
 				  </div>
 				</div>
 			</a>
+
+			<a href="javascript:;" id="uninstall">
+				<div class="tile bg-orange">
+				  <div class="tile-content icon">
+				  	<i class="fa fa-unlink"></i>
+				  </div>
+				  <div class="tile-status">
+				    <span class="name"><%= __('Uninstall') %></span>
+				  </div>
+				</div>
+			</a>
+
+
 		</div>
 	</div>	  
 
@@ -40,18 +53,38 @@
 
 
 
+<script type="text/x-handlebars-template" class="__UNINSTALL__" lang="fr">
+	Etes-vous certain, vous devrez re-démarrer votre application
+</script>
+
+<script type="text/x-handlebars-template" class="__UNINSTALL__" lang="en">
+	Are you sure, you are going to need to restart your app.
+</script>
+
+
 
 
 <script type="text/javascript">
-// window.addEventListener('load', function () {
+window.addEventListener('load', function () {
 
-// 	socket.get('/user/count', function (response) {
-// 		if (response.count) {
-// 			$('#userCount').html(response.count).removeClass('hidden');
-// 		}
-// 	})
+	socket.get('/user/count', function (response) {
+		if (response.count) {
+			$('#userCount').html(response.count).removeClass('hidden');
+		}
+	});
 
-// })
+
+	$('#uninstall').on('click', function (e) {
+		e.preventDefault();
+		var uninstallConfirm = new qsi.confirm();
+		uninstallConfirm.setMessage('.__UNINSTALL__');
+		uninstallConfirm.setConfirm(function () {
+			window.location.href = '/admin/uninstall';
+		});
+		uninstallConfirm.show();
+	})
+
+})
 </script>
 
 

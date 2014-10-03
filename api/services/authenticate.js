@@ -16,7 +16,7 @@ module.exports = function (req, res, cb) {
   // }
 
   else if (sails.settings.auth_strategy == 'mix' || sails.settings.auth_strategy == 'full_integrated') {
-    ldap.authenticate(req.body.domain, req.body.username, req.body.password, function (err, user) {
+    ldap.authenticate(sails.settings.ldap_domain, req.body.username, req.body.password, function (err, user) {
       if (err || !user) passport.authenticate('local', cb)(req, res);
       else User.findOrCreateLocalUser(user, cb);
     })     

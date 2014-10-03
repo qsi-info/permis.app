@@ -1,0 +1,170 @@
+<div class="container">
+
+	<div class="row metro">
+		<div class="col-sm-12">
+			<h2>
+				<a href="/admin"><%= __('Admin') %></a> > 
+				<a href="javascript:;"><%= __('Users') %></a>
+			</h2>
+		</div>
+	</div>
+
+
+
+	<form method="post" action="/" data-parsley-validate="" id="setupForm">
+
+
+		<div class="row">
+			<div class="col-sm-6">
+
+				<fieldset>
+					<legend>Authentification</legend>
+				  <div class="form-group">
+				  	<label>Strategy</label>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="auth_strategy" id="full" value="full_integrated" checked="checked"/>
+						    Full Integrated (Only IE and LDAP Configuration)
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="auth_strategy" id="local" value="local_db"/>
+						    Local database only
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="auth_strategy" id="mix" value="mix"/>
+						    Mix (LDAP and local database)
+						  </label>
+						</div>
+				  </div>
+
+				  <div class="form-group">
+				  	<label>Login procedure</label>
+				  	<div class="radio">
+				  		<label>
+				  			<input type="radio" name="auth_login" id="basic" value="basic_http" checked="checked"/>
+				  			Basic HTTP authentification
+				  		</label>
+				  	</div>
+				  	<div class="radio">
+				  		<label>
+				  			<input type="radio" name="auth_login" id="signin" value="sign_in"/>
+				  			Sign in page
+				  		</label>
+				  	</div>
+				  </div>
+
+				</fieldset>
+			</div>
+
+			<div class="col-md-6">
+
+				<fieldset id="ldapConfiguration">
+					<legend>LDAP Configuration</legend>
+
+				  <div class="form-group">
+				    <label for="ldapUrl">Server url</label>
+				    <input type="url" 
+				    			 class="form-control" 
+				    			 id="ldapUrl" 
+				    			 required=""
+				    			 placeholder="ldap://your.domain.com"
+				    			 name="ldap_url"/>
+				  </div>
+
+				  <div class="form-group">
+				    <label for="ldapBaseDN">Base Domain</label>
+				    <input type="text" 
+				    			 class="form-control" 
+				    			 id="ldapBaseDN"
+				    			 required=""
+				    			 placeholder="DC=domain,DC=com" 
+				    			 name="ldap_basedn"/>
+				  </div>
+
+				  <div class="form-group">
+				    <label for="domain">Domain</label>
+				    <input type="text" 
+				    			 class="form-control" 
+				    			 id="domain" 
+				    			 required=""
+				    			 placeholder="DOMAIN"
+				    			 name="ldap_domain"/>
+				  </div>
+
+				  <div class="form-group">
+				    <label for="ldapUsername">Username</label>
+				    <input type="text" 
+				    			 class="form-control" 
+				    			 id="ldapUsername"
+				    			 required="" 
+				    			 placeholder="admin.username"
+				    			 name="ldap_username"/>
+				  </div>
+
+				  <div class="form-group">
+				    <label for="ldapPassword">Password</label>
+				    <input type="password" 
+				    			 class="form-control" 
+				    			 id="ldapPassword" 
+				    			 required=""
+				    			 placeholder="password"
+				    			 name="ldap_password"/>
+				  </div>
+
+				</fieldset>
+
+			</div>
+			<div class="col-sm-12">
+				<div class="pull-right">
+				  <button type="reset" id="reset" class="btn btn-danger">Reset</button>
+				  <button type="submit" class="btn btn-success">Submit</button>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+</div>
+
+
+
+<script type="text/javascript">
+window.addEventListener('load', function () {
+
+	$('#local').on('click', function () {
+		$('#ldapConfiguration input').prop('disabled', true).prop('required', false);
+		$('#ldapUrl').prop('type', 'text');
+	})
+
+	$('#full').on('click', function () {
+		$('#ldapConfiguration input').prop('disabled', false).prop('required', true);		
+		$('#ldapUrl').prop('type', 'url');
+	})
+
+	$('#mix').on('click', function () {
+		$('#ldapConfiguration input').prop('disabled', false).prop('required', true);		
+		$('#ldapUrl').prop('type', 'url');		
+	})
+
+	$('#reset').on('click', function () {
+		$('#setupForm').parsley().reset();
+		$('#ldapConfiguration input').prop('disabled', false).prop('required', true);		
+		$('#ldapUrl').prop('type', 'url');		
+	})
+
+
+})
+</script>
+
+
+
+
+
+
+
+
+

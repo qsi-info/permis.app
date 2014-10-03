@@ -17,8 +17,12 @@
 
 module.exports = {
     
-  
-
+  count: function (req, res) {
+  	User.count()
+  	.then(function (count) {
+  		return res.json({ count: count });
+  	});
+  },
 
   /**
    * Overrides for the settings in `config/controllers.js`

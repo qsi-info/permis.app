@@ -18,9 +18,10 @@ module.exports.bootstrap = function (cb) {
 		if (admin) {
 			Settings.findOne(1)
 			.then(function (settings) {
+				if (!settings) return cb();	
 				sails.settings = settings;
 				ldap.configure(settings);
-				return cb();
+				return cb();				
 			})
 		} else {
 			// Eventually get those informations from a config file.

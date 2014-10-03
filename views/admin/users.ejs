@@ -1,0 +1,59 @@
+<div class="container metro">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>
+				<a href="/admin"><%= __('Admin') %></a> > 
+				<a href="javascript:;"><%= __('Users') %></a>
+			</h2>
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-sm-6">
+	  	<div style="text-align: right;">
+		  	<a href="javascript:;">new user <i class="fa fa-plus-circle"></i></a>
+	  	</div>
+	    <div data-role="listview" class="listview-outlook">
+
+	    <% users.forEach(function (user) { %>
+	      <a href="javascript:;" class="list user-link" data-user="<%= user.id %>">
+	        <div class="list-content">
+	          <span class="list-title"><%= user.displayName %></span>
+	          <span class="list-subtitle"><%= user.account %></span>
+	          <span class="list-remark"><%= user.provider %></span>
+	        </div>
+	      </a>
+	    <% }) %>
+
+	    </div>
+	  </div>
+	</div>
+
+</div>
+
+
+
+<script type="text/javascript">
+window.addEventListener('load', function () {
+
+	// $('.user-link').on('click', function (e) {
+	// 	e.preventDefault();
+	// 	socket.get('/user/' + $(this).attr('data-user') , function (user) {
+	// 		$modal = $('#ModalUserEdit');
+	// 		// $modal.find('.modal-content').html(Handlebars.compile($('#__USER_EDIT_TEMPLATE__').html())(user));
+	// 		$modal.modal('show');
+	// 	})
+	// })
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+

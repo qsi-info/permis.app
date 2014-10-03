@@ -22,6 +22,8 @@
       <%- body %>
     </div>
 
+    <%- partial('./partials/modals/alert.modal.ejs') %>
+    <%- partial('./partials/modals/confirm.modal.ejs') %>
 
 
     <script src="/linker/js/socket.io.js"></script>
@@ -33,6 +35,7 @@
     <script src="/linker/js/handlebars-v2.0.0.js"></script>
     <script src="/linker/js/monent.js"></script>
     <script src="/linker/js/parsley.min.js"></script>
+    <script src="/linker/js/utils.js"></script>
 
     <script type="text/javascript" src="/js/parsley/i18n/<%= req.cookies[sails.config.i18n.cookie] || sails.config.i18n.defaultLocale %>.js"></script>
 
