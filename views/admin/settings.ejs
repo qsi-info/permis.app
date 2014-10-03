@@ -11,7 +11,7 @@
 
 
 
-	<form method="post" action="/" data-parsley-validate="" id="setupForm">
+	<form method="post" action="/admin/settings/update" data-parsley-validate="" id="setupForm">
 
 
 		<div class="row">
@@ -23,19 +23,31 @@
 				  	<label>Strategy</label>
 						<div class="radio">
 						  <label>
-						    <input type="radio" name="auth_strategy" id="full" value="full_integrated" checked="checked"/>
+						  	<% if (sails.settings.auth_strategy == 'full_integrated') { %>
+							    <input type="radio" name="auth_strategy" id="full" value="full_integrated" checked=""/>
+						  	<% } else { %>
+							    <input type="radio" name="auth_strategy" id="full" value="full_integrated" />
+						  	<% } %>
 						    Full Integrated (Only IE and LDAP Configuration)
 						  </label>
 						</div>
 						<div class="radio">
 						  <label>
-						    <input type="radio" name="auth_strategy" id="local" value="local_db"/>
+						  	<% if (sails.settings.auth_strategy == 'local_db') { %>
+							    <input type="radio" name="auth_strategy" id="local" value="local_db" checked=""/>
+						  	<% } else { %>
+							    <input type="radio" name="auth_strategy" id="local" value="local_db"/>
+						  	<% } %>
 						    Local database only
 						  </label>
 						</div>
 						<div class="radio">
 						  <label>
-						    <input type="radio" name="auth_strategy" id="mix" value="mix"/>
+						  	<% if (sails.settings.auth_strategy == 'mix') { %>
+							    <input type="radio" name="auth_strategy" id="mix" value="mix" checked=""/>
+						  	<% } else { %>
+							    <input type="radio" name="auth_strategy" id="mix" value="mix"/>
+						  	<% } %>
 						    Mix (LDAP and local database)
 						  </label>
 						</div>
@@ -45,13 +57,21 @@
 				  	<label>Login procedure</label>
 				  	<div class="radio">
 				  		<label>
-				  			<input type="radio" name="auth_login" id="basic" value="basic_http" checked="checked"/>
+						  	<% if (sails.settings.auth_login == 'basic_http') { %>
+					  			<input type="radio" name="auth_login" id="basic" value="basic_http" checked="checked"/>
+						  	<% } else { %>
+					  			<input type="radio" name="auth_login" id="basic" value="basic_http"/>
+						  	<% } %>
 				  			Basic HTTP authentification
 				  		</label>
 				  	</div>
 				  	<div class="radio">
 				  		<label>
-				  			<input type="radio" name="auth_login" id="signin" value="sign_in"/>
+						  	<% if (sails.settings.auth_login == 'sign_in') { %>
+					  			<input type="radio" name="auth_login" id="signin" value="sign_in" checked=""/>
+						  	<% } else { %>
+					  			<input type="radio" name="auth_login" id="signin" value="sign_in"/>
+						  	<% } %>
 				  			Sign in page
 				  		</label>
 				  	</div>
@@ -71,6 +91,7 @@
 				    			 class="form-control" 
 				    			 id="ldapUrl" 
 				    			 required=""
+				    			 value="<%= sails.settings.ldap_url %>"
 				    			 placeholder="ldap://your.domain.com"
 				    			 name="ldap_url"/>
 				  </div>
@@ -81,6 +102,7 @@
 				    			 class="form-control" 
 				    			 id="ldapBaseDN"
 				    			 required=""
+				    			 value="<%= sails.settings.ldap_basedn %>"
 				    			 placeholder="DC=domain,DC=com" 
 				    			 name="ldap_basedn"/>
 				  </div>
@@ -91,6 +113,7 @@
 				    			 class="form-control" 
 				    			 id="domain" 
 				    			 required=""
+				    			 value="<%= sails.settings.ldap_domain %>"
 				    			 placeholder="DOMAIN"
 				    			 name="ldap_domain"/>
 				  </div>
@@ -101,6 +124,7 @@
 				    			 class="form-control" 
 				    			 id="ldapUsername"
 				    			 required="" 
+				    			 value="<%= sails.settings.ldap_username %>"
 				    			 placeholder="admin.username"
 				    			 name="ldap_username"/>
 				  </div>
@@ -111,6 +135,7 @@
 				    			 class="form-control" 
 				    			 id="ldapPassword" 
 				    			 required=""
+				    			 value="<%= sails.settings.ldap_password %>"
 				    			 placeholder="password"
 				    			 name="ldap_password"/>
 				  </div>
@@ -121,7 +146,7 @@
 			<div class="col-sm-12">
 				<div class="pull-right">
 				  <button type="reset" id="reset" class="btn btn-danger">Reset</button>
-				  <button type="submit" class="btn btn-success">Submit</button>
+				  <button type="submit" id="submitSettingsButton" class="btn btn-success">Submit</button>
 				</div>
 			</div>
 		</div>
@@ -132,8 +157,23 @@
 
 
 
+<script type="text/x-handlebars-template" class="__CONFIRM_UPDATE_SETTINGS__" lang="fr">
+	Etes-vous certain de vouloir modifier les réglages de l&apos;application, le Red&eacute;marrage des instances <i>node</i> sera requis afin de voir les effets complets de vos modifications.
+</script>
+
+<script type="text/x-handlebars-template" class="__CONFIRM_UPDATE_SETTINGS__" lang="en">
+	Are you certain you want to update the settings. You will need to restart your node instances to see the full effects of your changes.
+</script>
+
+
+
 <script type="text/javascript">
 window.addEventListener('load', function () {
+
+	if ($('#local').prop('checked')) {
+		$('#ldapConfiguration input').prop('disabled', true).prop('required', false);
+		$('#ldapUrl').prop('type', 'text');		
+	}
 
 	$('#local').on('click', function () {
 		$('#ldapConfiguration input').prop('disabled', true).prop('required', false);
@@ -154,6 +194,17 @@ window.addEventListener('load', function () {
 		$('#setupForm').parsley().reset();
 		$('#ldapConfiguration input').prop('disabled', false).prop('required', true);		
 		$('#ldapUrl').prop('type', 'url');		
+	})
+
+
+	$('#submitSettingsButton').on('click', function (e) {
+		e.preventDefault();
+		var confirmForm = new qsi.confirm();
+		confirmForm.setMessage('.__CONFIRM_UPDATE_SETTINGS__');
+		confirmForm.setConfirm(function () {
+			$('#setupForm').submit();
+		});
+		confirmForm.show();
 	})
 
 

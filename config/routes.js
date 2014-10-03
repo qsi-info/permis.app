@@ -34,6 +34,8 @@ module.exports.routes = {
 
   'post /setup/configure' : 'SetupController.configure',
 
+  'post /admin/settings/update' : 'AdminController.updateSettings',
+
 };
 
 

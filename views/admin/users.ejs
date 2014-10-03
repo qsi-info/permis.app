@@ -19,8 +19,9 @@
 	      <a href="javascript:;" class="list user-link" data-user="<%= user.id %>">
 	        <div class="list-content">
 	          <span class="list-title"><%= user.displayName %></span>
-	          <span class="list-subtitle"><%= user.account %></span>
-	          <span class="list-remark"><%= user.provider %></span>
+	          <span class="list-subtitle">account: <%= user.account %></span>
+	          <span class="list-remark">permission level: <%= user.permission_level %></span>
+	          <span class="list-remark">provider: <%= user.provider %></span>
 	        </div>
 	      </a>
 	    <% }) %>

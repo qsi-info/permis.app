@@ -26,6 +26,18 @@ module.exports = {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
+	updateSettings: function (req, res) {
+		Settings.update(1, req.body)
+		.then(function (settings) {
+			sails.settings = settings[0];
+			return res.redirect('/admin');
+		})
+		.fail(function (err) {
+			return console.log(err);
+		})
+	},
+
+
 	users: function (req, res) {
 		User.find()
 		.sort('account')

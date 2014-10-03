@@ -31,27 +31,32 @@ module.exports = {
 		// LDAP configuration settings
 		ldap_url: {
 			type: 'string',
-			defaultsTo: 'ldap://your.domain',
+			defaultsTo: ''
+			// defaultsTo: 'ldap://your.domain',
 		},
 
 		ldap_domain: {
 			type: 'string',
-			defaultsTo: 'DOMAIN',
+			defaultsTo: ''
+			// defaultsTo: 'DOMAIN',
 		},
 
 		ldap_basedn: {
 			type: 'string',
-			defaultsTo: 'DC=domain,DC=com'
+			defaultsTo: ''
+			// defaultsTo: 'DC=domain,DC=com'
 		},
 
 		ldap_username: {
 			type: 'string',
-			defaultsTo: 'username@domain.com',
+			defaultsTo: ''
+			// defaultsTo: 'username@domain.com',
 		},
 
 		ldap_password: {
 			type: 'string',
-			defaultsTo: 'password',
+			defaultsTo: ''
+			// defaultsTo: 'password',
 		},
     
   }

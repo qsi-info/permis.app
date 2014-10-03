@@ -1,0 +1,26 @@
+<script type="text/x-handlebars-template" class="__LOGOUT_NOT_AVAILABLE__" lang="fr">
+  Cette fonction n&apos;est pas disponible avec votre navigateur. Veuillez fermer compl&egrave;tement afin de terminer votre session.
+</script>
+
+<script type="text/x-handlebars-template" class="__LOGOUT_NOT_AVAILABLE__" lang="en">
+  This option is not available with your browser. Please close it to logout. 
+</script>
+
+
+<% if (sails.settings.auth_login == 'basic_http') { %> 
+<script type="text/javascript">
+window.addEventListener('load', function () {
+  $('#logout').on('click', function (e) {
+    e.preventDefault();
+    if ('ActiveXObject' in window) {
+      document.execCommand("ClearAuthenticationCache", false);
+      window.location.href = '/auth/logout';      
+    } else {
+      var noLogoutAlert = new qsi.alert();
+      noLogoutAlert.setMessage('.__LOGOUT_NOT_AVAILABLE__');
+      noLogoutAlert.show();
+    }
+  })
+})
+</script>
+<% } %>
