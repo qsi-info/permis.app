@@ -8,6 +8,7 @@ module.exports = (function () {
 	return {
 
 		authenticate: function (domain, username, password, cb) {
+
 			ad.getRootDSE(function (err, results) {
 				if (err) return (err, false);
 				var account = domain + '\\' + username;
@@ -39,6 +40,22 @@ module.exports = (function () {
 				});
 			}
 		},
+
+
+		isMemberOf: function (account, group, cb){
+			ad.isUserMemberOf(account, group, function (err, isMember) {
+				if (err) return console.log(err);
+				return cb(isMember);
+			});
+		},
+
+		userExists: function (account, cb) {
+			ad.findUser(account, function (err, user) {
+				if (err || !user) return cb(false);
+				return cb(true);
+			})
+		}
+
 
 	}
 

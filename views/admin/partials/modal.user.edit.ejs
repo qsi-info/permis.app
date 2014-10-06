@@ -1,12 +1,107 @@
 <div class="modal qsi-alert fade" id="ModalUser" data-backdrop="static" data-keyboard="false">
+  <form action="javascript:;" method="post" id="userCreateForm" data-parsley-validate="">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= __('Modal.User.Create') %></h3>
+        </div>
+        <div class="modal-body">
 
+
+          <div class="form-group">
+            <label for="displayName"><%= __('User.DisplayName') %></label>
+            <input type="text" 
+                   class="form-control" 
+                   id="displayName" 
+                   required=""
+                   name="displayName"/>
+          </div>
+
+          <div class="form-group">
+            <label for="account"><%= __('User.Account') %></label>
+            <input type="text" 
+                   class="form-control" 
+                   id="account" 
+                   required=""
+                   name="account"/>
+          </div>
+
+          <div class="form-group">
+            <label for="email"><%= __('User.Email') %></label>
+            <input type="email" 
+                   class="form-control" 
+                   id="email" 
+                   required=""
+                   name="mail"/>
+          </div>
+
+          <div class="form-group">
+            <label for="password"><%= __('User.Password') %></label>
+            <input type="password" 
+                   class="form-control" 
+                   id="password" 
+                   required=""
+                   name="password"/>
+          </div>
+
+          <div class="form-group">
+            <label for="password"><%= __('User.PasswordConfirm') %></label>
+            <input type="password" 
+                   class="form-control" 
+                   data-parsley-equalto="#password"
+                   required=""/>
+          </div>
+
+          <div class="form-group">
+            <label for="permission_level"><%= __('User.PermissionLevel') %></label>
+            <select class="form-control" name="permission_level">
+              <option value="view">view</option>
+              <option value="contribute">contribute</option>
+              <option value="edit">edit</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= __('Close') %></button>
+          <button type="submit" id="createUser" class="btn btn-success"><%= __('Save') %></button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 
 
 
+<script type="text/javascript">
+window.addEventListener('load', function () {
 
-<script type="text/x-handlebars-template" id="__MODAL_USER_EDIT__">
-  <form action="/user/{{id}}" method="post" data-id="{{id}}" id="userEditForm" data-parsley-validate="">
+  $('#userCreateForm').on('submit', function (e) {
+    e.preventDefault();
+
+    var $inputs = $(this).find('[name]');
+
+    var values = {};
+    $inputs.each(function() {
+        values[this.name] = $(this).val();
+    });
+
+    socket.post('/user', values, function (response) {
+      console.log(response);
+      if (response.errors) return window.alert(response.errors[0]);
+      window.location.reload();
+    })
+
+  })
+
+
+})
+</script>
+
+
+<script type="text/x-handlebars-template" id="__MODAL_USER_CREATE__">
+  <form action="" method="post" id="userCreateForm" data-parsley-validate="">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -36,24 +131,42 @@
           </div>
 
           <div class="form-group">
+            <label for="password"><%= __('User.Password') %></label>
+            <input type="password" 
+                   class="form-control" 
+                   id="password" 
+                   required=""
+                   name="password"/>
+          </div>
+
+          <div class="form-group">
+            <label for="password"><%= __('User.PasswordConfirm') %></label>
+            <input type="password" 
+                   class="form-control" 
+                   data-parsley-equalto="#password"
+                   required=""/>
+          </div>
+
+          <div class="form-group">
             <label for="permission_level"><%= __('User.PermissionLevel') %></label>
             <select class="form-control" name="permission_level">
               <option value="view" {{selected permission_level 'view'}}>view</option>
               <option value="contribute" {{selected permission_level 'contribute'}}>contribute</option>
               <option value="edit" {{selected permission_level 'edit'}}>edit</option>
-              <option value="admin" {{selected permission_level 'admin'}}>admin</option>
             </select>
           </div>
 
         </div>
         <div class="modal-footer">
+          {{#if id}}
           <div class="createdAtupdatedAt">
             <small>Created at {{createdAt}}</small><br/>
             <small>Updated at {{updatedAt}}</small>
           </div>
+          {{/if}}
 
           <button type="button" class="btn btn-default" data-dismiss="modal"><%= __('Close') %></button>
-          <button type="button" id="userEditSubmitButton" class="btn btn-success" data-dismiss="modal"><%= __('Save') %></button>
+          <button type="button" id="createUser" class="btn btn-success" data-dismiss="modal"><%= __('Save') %></button>
         </div>
       </div>
     </div>

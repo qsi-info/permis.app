@@ -32,31 +32,32 @@ module.exports = {
 		ldap_url: {
 			type: 'string',
 			defaultsTo: ''
-			// defaultsTo: 'ldap://your.domain',
 		},
 
 		ldap_domain: {
 			type: 'string',
 			defaultsTo: ''
-			// defaultsTo: 'DOMAIN',
 		},
 
 		ldap_basedn: {
 			type: 'string',
 			defaultsTo: ''
-			// defaultsTo: 'DC=domain,DC=com'
 		},
 
 		ldap_username: {
 			type: 'string',
 			defaultsTo: ''
-			// defaultsTo: 'username@domain.com',
 		},
 
 		ldap_password: {
 			type: 'string',
 			defaultsTo: ''
-			// defaultsTo: 'password',
+		},
+
+		ie_integration: {
+			type: 'boolean',
+			required: true,
+			defaultsTo: true,
 		},
 
 
@@ -70,7 +71,39 @@ module.exports = {
 			type: 'string',
 			defaultsTo: 'bootstrap/default',
 		},
-    
-  }
+  
+
+		// Permission Level 
+		view_group: {
+			type: 'string',
+			required: true,
+			defaultsTo: 'LDAP_VIEW_GROUP',
+		},
+
+		contribute_group: {
+			type: 'string',
+			required: true,
+			defaultsTo: 'LDAP_CONTRIBUTE_GROUP',
+		},
+
+		edit_group: {
+			type: 'string',
+			required: true,
+			defaultsTo: 'LDAP_EDIT_GROUP',
+		},
+
+  },
+
+
+
+
+  beforeValidation: function (attrs, done) {
+  	attrs.ie_integration = (!attrs.ie_integration) ? false : true;
+  	done();
+  },
+
+
+
+
 
 };

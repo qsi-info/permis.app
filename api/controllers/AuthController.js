@@ -20,6 +20,8 @@ module.exports = {
    
 
 	gateway: function (req, res) {
+    if (!sails.settings || !sails.settings.ie_integration) 
+      return res.redirect('/auth/login');
 		return res.view({ layout: 'auth.layout' });
 	},
 
@@ -60,11 +62,16 @@ module.exports = {
 
 	windows: function (req, res) {
 
-    ldap.findUser(req.body.domain, req.body.username, function (err, user) {
-      if (err || !user) return res.redirect('/auth/login');
-      User.findOrCreateLocalUser(user, function (err, user) {
-      })
-    })
+    // ldap.findUser(req.body.domain, req.body.username, function (err, user) {
+    //   if (err || !user) return res.redirect('/auth/login');
+    //   permissions(user, function (err, user) {
+    //     req.logIn(user, function () {
+    //       return res.redirect('/');
+    //     })
+    //   })
+    //   // User.findOrCreateLocalUser(user, function (err, user) {
+    //   // })
+    // })
 
 	},
 
@@ -82,7 +89,7 @@ module.exports = {
     req.body.domain = sails.settings.ldap_domain;
     authenticate(req, res, function (err, user) {
       if (err || !user) {
-        req.flash('message', { message: 'bad_credentials' })
+        req.flash('message', { message: 'bad_credentials or not enough priviledge' })
         return res.redirect('/auth/signin');
       }
       req.logIn(user, function (err) { 

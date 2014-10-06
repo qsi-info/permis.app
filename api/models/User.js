@@ -46,6 +46,7 @@ module.exports = {
 	  	type: 'string',
 	  	enum: ['ldap', 'local'],
 	  	required: true,
+	  	defaultsTo: 'local',
 	  },
 
     // Override toJSON method to remove password from API
@@ -59,6 +60,8 @@ module.exports = {
 
 
 	beforeCreate: function(user, cb) {
+
+
     var bcrypt = require('bcrypt');
     if (user.password !== '') {
 		  bcrypt.genSalt(10, function(err, salt) {
@@ -68,7 +71,15 @@ module.exports = {
 		        cb(err);
 		      }else{
 		        user.password = hash;
-		        cb(null, user);
+
+		        if (!sails.settings || sails.settings.auth_strategy == 'local_db') {
+		        	return cb();
+		        }
+
+		        ldap.userExists(user.account, function (exists) {
+		        	if (exists) return cb('user account already exists in your active directory');
+		        	else cb()
+		        })
 		      }
 		    });
 		  });
@@ -81,17 +92,25 @@ module.exports = {
 		User.findOne()
 		.where({ account: user.sAMAccountName })
 		.then(function (foundUser) {
-			if (foundUser) return done(null, foundUser)
-			User.create({
-				account     : user.sAMAccountName,
-				displayName : user.displayName,
-				mail        : user.mail,
-				provider    : 'ldap',
-			})
-			.then(function (createdUser) {
-				return done(null, createdUser)
-			})
-			.fail(done);
+			if (foundUser) {
+				foundUser.permission_level = user.permission_level;
+				foundUser.save(function (err) {
+					if (err) return console.log(err);
+					return done(null, foundUser)
+				})
+			} else {
+				User.create({
+					account     : user.sAMAccountName,
+					displayName : user.displayName,
+					mail        : user.mail,
+					provider    : 'ldap',
+					permission_level : user.permission_level,
+				})
+				.then(function (createdUser) {
+					return done(null, createdUser)
+				})
+				.fail(done);	
+			}
 		})
 		.fail(done);	
 	},

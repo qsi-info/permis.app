@@ -30,7 +30,6 @@ module.exports = {
 		Settings.update(1, req.body)
 		.then(function (settings) {
 			setup(settings[0]);
-			// sails.settings = settings[0];
 			return res.redirect('/admin');
 		})
 		.fail(function (err) {
@@ -42,6 +41,7 @@ module.exports = {
 	users: function (req, res) {
 		User.find()
 		.sort('account')
+		.where({ permission_level: { not: 'admin' }})
 		.then(function (users) {
 			return res.view({ users: users, layout: 'admin.layout.ejs' });
 		})

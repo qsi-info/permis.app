@@ -19,6 +19,7 @@ module.exports = {
     
   count: function (req, res) {
   	User.count()
+    .where({ permission_level: { not: 'admin' }})    
   	.then(function (count) {
   		return res.json({ count: count });
   	});

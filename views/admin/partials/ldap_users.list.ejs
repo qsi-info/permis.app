@@ -1,0 +1,21 @@
+<fieldset>
+	<legend>LDAP Users</legend>
+</fieldset>	  
+<div class="metro">
+  <div data-role="listview" class="listview-outlook">
+
+  <% users.forEach(function (user) { %>
+  <% if (user.provider == 'ldap') { %>
+    <a href="javascript:;" class="list" data-user="<%= user.id %>">
+      <div class="list-content">
+        <span class="list-title"><%= user.displayName %></span>
+        <span class="list-subtitle">account: <%= user.account %></span>
+        <span class="list-remark">permission level: <%= user.permission_level %></span>
+        <span class="list-remark">provider: <%= user.provider %></span>
+      </div>
+    </a>
+    <% } %>
+  <% }) %>
+
+  </div>
+</div>

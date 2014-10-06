@@ -1,77 +1,52 @@
-<div class="container metro">
+<div class="container">
 	<div class="row breadcrumbs">
 		<div class="col-sm-12">
 			<h2>
 				<a href="/admin"><%= __('Admin') %></a> > 
-				<a href="javascript:;"><%= __('Users') %></a>
+				<a href="javascript:;"><%= __('Users and Permissions') %></a>
 			</h2>
 		</div>
 	</div>
 
 	<div class="row">
-	  <div class="col-sm-6">
-	  	<div style="text-align: right;">
-		  	<a href="javascript:;">new user <i class="fa fa-plus-circle"></i></a>
+
+	  <div class="col-md-6">
+	  	<div class="row">
+
+	  		<div class="col-md-12" style="margin-bottom: 20px;">
+	  			<%- partial('./partials/local_users.list.ejs') %>
+	  		</div>
+				
+				<div class="col-md-12" style="margin-bottom: 20px;">
+					<%- partial('./partials/ldap_users.list.ejs')	%>
+				</div>
+
 	  	</div>
-	    <div data-role="listview" class="listview-outlook">
 
-	    <% users.forEach(function (user) { %>
-	      <a href="javascript:;" class="list user-link" data-user="<%= user.id %>">
-	        <div class="list-content">
-	          <span class="list-title"><%= user.displayName %></span>
-	          <span class="list-subtitle">account: <%= user.account %></span>
-	          <span class="list-remark">permission level: <%= user.permission_level %></span>
-	          <span class="list-remark">provider: <%= user.provider %></span>
-	        </div>
-	      </a>
-	    <% }) %>
 
-	    </div>
 	  </div>
+
+
+
+
+	  <div class="col-md-6">
+
+	  	<div>
+	  		<%- partial('./partials/permissions.form.ejs') %>
+	  	</div>
+
+	  </div>
+
+
 	</div>
 
 </div>
 
 
-<%- partial('./partials/modal.user.edit.ejs') %>
 
 
-<script type="text/javascript">
-window.addEventListener('load', function () {
-
-	$('.user-link').on('click', function (e) {
-		e.preventDefault();
-		socket.get('/user/' + $(this).attr('data-user') , function (user) {
-			console.log(user);
-			$modal = $('#ModalUser');
-			$modal.html(Handlebars.compile($('#__MODAL_USER_EDIT__').html())(user));
-			$modal.modal('show');
-		})
-	});
 
 
-	$('body').on('click', '#userEditSubmitButton', function (e) {
-		e.preventDefault()
-		var $form = $('#userEditForm');
-		if ($form.attr('data-id') == 1) {
-			return window.alert('Cannot change admin');
-		}
-		var action = $form.attr('action');
-		var updateValues = {
-			permission_level: $form.find('[name="permission_level"]').val(),
-			displayName: $form.find('[name="displayName"]').val(),
-			mail: $form.find('[name="mail"]').val(),
-		};
-
-		$('body').addClass('loading');
-		socket.put(action, updateValues, function (response) {
-			window.location.reload();
-		})
-
-	})
-
-})
-</script>
 
 
 

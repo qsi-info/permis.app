@@ -1,0 +1,72 @@
+<form method="post" action="/admin/settings/update" data-parsley-validate="" id="setupForm">
+	<fieldset>
+		<legend>Active directory permissions</legend>
+		<div class="form-group">
+			<label>View group</label>
+			<input type="text" 
+							name="view_group"
+							class="form-control"
+							value="<%= sails.settings.view_group %>"
+							placeholder="<%= __('View.Group.Placeholder') %>"
+							required=""/>
+		</div>
+		<div class="form-group">
+			<label>Contribute group</label>
+			<input type="text" 
+							name="contribute_group"
+							class="form-control"
+							value="<%= sails.settings.contribute_group %>"
+							placeholder="<%= __('Contribute.Group.Placeholder') %>"
+							required=""/>
+		</div>
+		<div class="form-group">
+			<label>Edit group</label>
+			<input type="text" 
+							name="edit_group"
+							class="form-control"
+							value="<%= sails.settings.edit_group %>"
+							placeholder="<%= __('Edit.Group.Placeholder') %>"
+							required=""/>
+		</div>
+	</fieldset>
+</form>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="pull-right">
+		  <button type="reset" id="reset" class="btn btn-danger">Reset</button>
+		  <button type="submit" id="submitSettingsButton" class="btn btn-success">Submit</button>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<script type="text/x-handlebars-template" class="__CONFIRM_UPDATE_SETTINGS__" lang="fr">
+	Etes-vous certain de vouloir modifier les réglages de l&apos;application, le Red&eacute;marrage des instances <i>node</i> sera requis afin de voir les effets complets de vos modifications.
+</script>
+
+<script type="text/x-handlebars-template" class="__CONFIRM_UPDATE_SETTINGS__" lang="en">
+	Are you certain you want to update the settings. You will need to restart your node instances to see the full effects of your changes.
+</script>
+
+
+
+<script type="text/javascript">
+window.addEventListener('load', function () {
+
+
+	$('#submitSettingsButton').on('click', function (e) {
+		e.preventDefault();
+		var confirmForm = new qsi.confirm();
+		confirmForm.setMessage('.__CONFIRM_UPDATE_SETTINGS__');
+		confirmForm.setConfirm(function () {
+			$('#setupForm').submit();
+		});
+		confirmForm.show();
+	})
+
+
+})
+</script>
