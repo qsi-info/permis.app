@@ -62,6 +62,7 @@ module.exports = {
 
 	windows: function (req, res) {
 
+    console.log(req.body);
     authenticate(req, res, function (err, user) {
       if (err || !user) return res.redirect('/auth/login');
       req.logIn(user, function (err) {
