@@ -23,7 +23,7 @@ module.exports = function (req, res, cb) {
 
   else if (sails.settings.auth_strategy == 'mix' || sails.settings.auth_strategy == 'full_integrated') {
     var domain = typeof req.body.domain !== 'undefined' ? req.body.domain : sails.settings.ldap_domain;
-    var password = typeof req.body.password;
+    var password = req.body.password;
     ldap.authenticate(domain, req.body.username, password, function (err, user) {
       if (err || !user) passport.authenticate('local', cb)(req, res);
       else get_user_ldap_permissions(user, cb);
