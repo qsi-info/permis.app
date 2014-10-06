@@ -52,6 +52,23 @@ module.exports = {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
+
+	credentials: function (req, res) {
+		User.findOne(1)
+		.then(function (admin) {
+			return res.view({ admin: admin, layout: 'admin.layout.ejs' });
+		})
+	},
+
+
+	updateCredentials: function (req, res) {
+		var password = req.body.password;
+		User.update(1, { password: password }, function (err, user) {
+			if (err) return console.log(err);
+			return res.redirect('/admin');
+		})
+	},
+
 	uninstall: function (req, res) {
 		User.query("DROP TABLE " + Settings._tableName, function (err) {
 			if (err) return console.log(err);

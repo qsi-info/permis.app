@@ -84,6 +84,19 @@ module.exports = {
     }
 	},
 
+	beforeUpdate: function (user, cb) {
+		var bcrypt = require('bcrypt');
+		if (user.password !== '') {
+		  bcrypt.genSalt(10, function(err, salt) {
+		    bcrypt.hash(user.password, salt, function(err, hash) {
+		    	if (err) return cb(err);
+		    	user.password = hash;
+		    	cb();
+		    })
+		  })
+		}
+	},
+
 	findOrCreateLocalUser: function (user, done) {
 		User.findOne()
 		.where({ account: user.sAMAccountName })
