@@ -62,7 +62,6 @@ module.exports = {
 
 	windows: function (req, res) {
 
-    req.body.password = null;
     authenticate(req, res, function (err, user) {
       if (err || !user) return res.redirect('/auth/login');
       req.logIn(user, function (err) {
@@ -94,7 +93,6 @@ module.exports = {
 
 
   process: function (req, res) {
-    req.body.domain = sails.settings.ldap_domain;
     authenticate(req, res, function (err, user) {
       if (err || !user) {
         req.flash('message', { message: 'bad_credentials or not enough priviledge' })
