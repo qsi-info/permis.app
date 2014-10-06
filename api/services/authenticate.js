@@ -25,6 +25,7 @@ module.exports = function (req, res, cb) {
     var domain = typeof req.body.domain !== 'undefined' ? req.body.domain : sails.settings.ldap_domain;
     var password = req.body.password;
     ldap.authenticate(domain, req.body.username, password, function (err, user) {
+      console.log(err, user);
       if (err || !user) passport.authenticate('local', cb)(req, res);
       else get_user_ldap_permissions(user, cb);
     })

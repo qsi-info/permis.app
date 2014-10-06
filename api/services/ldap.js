@@ -8,13 +8,12 @@ module.exports = (function () {
 	return {
 
 		authenticate: function (domain, username, password, cb) {
-			console.log(domain, username, password);
-			console.log(sails.settings.ldap_domain);
 			ad.getRootDSE(function (err, results) {
 				if (err) return (err, false);
 				if (!password) {
 					console.log('Using no password');
 					if (domain != sails.settings.ldap_domain) return cb(null, false);
+					console.log('Find User');
 					ad.findUser(username, function (err, user) {
 						if (err || !user) return cb(err, false);
 						return cb(null, user);

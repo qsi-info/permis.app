@@ -62,24 +62,12 @@ module.exports = {
 
 	windows: function (req, res) {
 
-    console.log(req.body);
     authenticate(req, res, function (err, user) {
       if (err || !user) return res.redirect('/auth/login');
       req.logIn(user, function (err) {
         return res.redirect('/');
       })
     });
-
-    // ldap.findUser(req.body.domain, req.body.username, function (err, user) {
-    //   if (err || !user) return res.redirect('/auth/login');
-    //   permissions(user, function (err, user) {
-    //     req.logIn(user, function () {
-    //       return res.redirect('/');
-    //     })
-    //   })
-    //   // User.findOrCreateLocalUser(user, function (err, user) {
-    //   // })
-    // })
 
 	},
 
