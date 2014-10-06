@@ -8,7 +8,8 @@ module.exports = (function () {
 	return {
 
 		authenticate: function (domain, username, password, cb) {
-		
+			console.log(domain, username, password);
+			console.log(sails.settings.domain);
 			ad.getRootDSE(function (err, results) {
 				if (err) return (err, false);
 				if (password == null) {

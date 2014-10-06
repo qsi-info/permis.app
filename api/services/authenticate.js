@@ -10,6 +10,8 @@ module.exports = function (req, res, cb) {
   }
 
   else if (sails.settings.auth_strategy == 'full_integrated') {
+    console.log('User full_integrated');
+    console.log(req.body);
     ldap.authenticate(req.body.domain, req.body.username, null, function (err, user) {
       if (err || !user) passport.authenticate('local', cb)(req, res);
       else get_user_ldap_permissions(user, cb);
