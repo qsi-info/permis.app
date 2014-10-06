@@ -22,7 +22,7 @@ module.exports = {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
-	settings: function (req, res) {
+	authentification: function (req, res) {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
@@ -68,6 +68,17 @@ module.exports = {
 			return res.redirect('/admin');
 		})
 	},
+
+
+
+	database: function (req, res) {
+		return res.view({ layout: 'admin.layout.ejs' });
+	},
+
+	settings: function (req, res) {
+		return res.view({ layout: 'admin.layout.ejs' });
+	},
+
 
 	uninstall: function (req, res) {
 		User.query("DROP TABLE " + Settings._tableName, function (err) {
