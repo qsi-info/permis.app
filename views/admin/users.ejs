@@ -13,9 +13,11 @@
 	  <div class="col-md-6">
 	  	<div class="row">
 
+	  		<% if(sails.settings.auth_strategy != 'full_integrated') { %>
 	  		<div class="col-md-12" style="margin-bottom: 20px;">
 	  			<%- partial('./partials/local_users.list.ejs') %>
 	  		</div>
+	  		<% } %>
 				
 				<div class="col-md-12" style="margin-bottom: 20px;">
 					<%- partial('./partials/ldap_users.list.ejs')	%>

@@ -25,25 +25,3 @@
 	window.location.href = '/auth/login';
 </script>
 <% } %>
-
-<!-- <form action="/auth/windows" method="post" name="auth">
-	<input type="hidden" name="username"/>
-	<input type="hidden" name="password"/>
-</form>
-
-<script type="text/javascript">
-var form = document.forms['auth'];
-if ('ActiveXObject' in window) {
-	try {
-	  var wshell = new ActiveXObject("WScript.Shell");
-	  var username = wshell.ExpandEnvironmentStrings("%USERNAME%");
-	  form.elements['username'].value = username;
-	  form.submit();
-	} catch(e) {
-		console.log(e);
-		window.location.href = '/auth/login';
-	}
-} else {
-	window.location.href = '/auth/login';
-}
-</script>

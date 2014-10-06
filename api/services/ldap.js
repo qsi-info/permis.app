@@ -1,5 +1,5 @@
 var ActiveDirectory = require('activedirectory');
-
+var Q = require('q');
 
 module.exports = (function () {
 
@@ -8,18 +8,27 @@ module.exports = (function () {
 	return {
 
 		authenticate: function (domain, username, password, cb) {
-
+		
 			ad.getRootDSE(function (err, results) {
 				if (err) return (err, false);
-				var account = domain + '\\' + username;
-				ad.authenticate(account, password, function (err, isAuthenticated) {
-					if (err || !isAuthenticated) return cb(err, false);
+				if (password == null) {
+					if (domain != sails.settings.domain) return cb(null, false);
 					ad.findUser(username, function (err, user) {
 						if (err || !user) return cb(err, false);
 						return cb(null, user);
-					})
-				})
-			})
+					});
+				}
+				else {
+					var account = domain + '\\' + username;
+					ad.authenticate(account, password, function (err, isAuthenticated) {
+						if (err || !isAuthenticated) return cb(err, false);
+						ad.findUser(username, function (err, user) {
+							if (err || !user) return cb(err, false);
+							return cb(null, user);
+						})
+					})					
+				}
+			});
 		},
 
 		findUser: function (domain, username, cb) {

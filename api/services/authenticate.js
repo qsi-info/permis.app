@@ -1,5 +1,6 @@
 
 var passport = require('passport');
+var Q = require('q');
 
 
 module.exports = function (req, res, cb) {
@@ -9,10 +10,10 @@ module.exports = function (req, res, cb) {
   }
 
   // else if (sails.settings.auth_strategy == 'full_integrated') {
-  //   ldap.findUser(req.body.domain, req.body.username, function (err, user) {
-  //     if (err || !user) cb(err, false);
-  //     else User.findOrCreateLocalUser(user, cb);
-  //   });
+  //   ldap.authenticate(req.body.domain, req.body.username, null, function (err, user) {
+  //     if (err || !user) cb(null, false);
+  //     else get_user_ldap_permissions(user, cb);
+  //   })
   // }
 
   else if (sails.settings.auth_strategy == 'mix' || sails.settings.auth_strategy == 'full_integrated') {
@@ -38,31 +39,74 @@ module.exports = function (req, res, cb) {
 
 function get_user_ldap_permissions (user, cb) {
   // Check group permission
-  ldap.isMemberOf(user.sAMAccountName, sails.settings.edit_group, function (isMember) {
-    if (isMember) {
-      user.permission_level = 'edit';
-      User.findOrCreateLocalUser(user, cb);
-    }
-    else {
-      ldap.isMemberOf(user.sAMAccountName, sails.settings.contribute_group, function (isMember) {
-        if (isMember) {
-          user.permission_level = 'contribute';
-          User.findOrCreateLocalUser(user, cb);
-        }
-        else {
-          ldap.isMemberOf(user.sAMAccountName, sails.settings.view_group, function (isMember) {
-            if (isMember) {
-              user.permission_level = 'view';
-              User.findOrCreateLocalUser(user, cb);
-            }
-            else {
-              cb(null, false);
-            }
-          });
-        }
-      })
-    }
-  })   
+
+
+    var promises = [];
+
+
+    var deferredEdit = Q.defer();
+    ldap.isMemberOf(user.sAMAccountName, sails.settings.edit_group, function (isMember) {
+      deferredEdit.resolve(isMember);
+    });
+    promises.push(deferredEdit.promise)
+
+    var deferredContribute = Q.defer();
+    ldap.isMemberOf(user.sAMAccountName, sails.settings.contribute_group, function (isMember) {
+      deferredContribute.resolve(isMember);
+    });
+    promises.push(deferredContribute.promise)
+
+    var deferredView = Q.defer();
+    ldap.isMemberOf(user.sAMAccountName, sails.settings.view_group, function (isMember) {
+      deferredView.resolve(isMember);
+    });
+    promises.push(deferredView.promise)
+
+    Q.all(promises).then(function (memberships) {
+      console.log(memberships);
+      if (memberships[0]) {
+        user.permission_level = 'edit';
+        User.findOrCreateLocalUser(user, cb);
+      } 
+      else if (memberships[1]) {
+        user.permission_level = 'contribute';
+        User.findOrCreateLocalUser(user, cb);
+      } 
+      else if (memberships[2]) {
+        user.permission_level = 'view';
+        User.findOrCreateLocalUser(user, cb);
+      }
+      else cb(null, false);
+    })
+    .fail(function (err) {
+      console.log(err);
+    })
+
+  // ldap.isMemberOf(user.sAMAccountName, sails.settings.edit_group, function (isMember) {
+  //   if (isMember) {
+  //     user.permission_level = 'edit';
+  //     User.findOrCreateLocalUser(user, cb);
+  //   }
+  //   else {
+  //     ldap.isMemberOf(user.sAMAccountName, sails.settings.contribute_group, function (isMember) {
+  //       if (isMember) {
+  //         user.permission_level = 'contribute';
+  //         User.findOrCreateLocalUser(user, cb);
+  //       }
+  //       else {
+  //         ldap.isMemberOf(user.sAMAccountName, sails.settings.view_group, function (isMember) {
+  //           if (isMember) {
+  //             user.permission_level = 'view';
+  //             User.findOrCreateLocalUser(user, cb);
+  //           }
+  //           else {
+  //             cb(null, false);
+  //           }
+  //         });
+  //       }
+  //     })
+  //   }
+  // })   
 }
 
 

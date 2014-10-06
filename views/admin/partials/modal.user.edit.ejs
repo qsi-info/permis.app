@@ -87,6 +87,8 @@ window.addEventListener('load', function () {
         values[this.name] = $(this).val();
     });
 
+    values.account = values.account + '@local';
+
     socket.post('/user', values, function (response) {
       console.log(response);
       if (response.errors) return window.alert(response.errors[0]);

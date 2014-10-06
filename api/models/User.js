@@ -60,8 +60,6 @@ module.exports = {
 
 
 	beforeCreate: function(user, cb) {
-
-
     var bcrypt = require('bcrypt');
     if (user.password !== '') {
 		  bcrypt.genSalt(10, function(err, salt) {
@@ -71,11 +69,9 @@ module.exports = {
 		        cb(err);
 		      }else{
 		        user.password = hash;
-
 		        if (!sails.settings || sails.settings.auth_strategy == 'local_db') {
 		        	return cb();
 		        }
-
 		        ldap.userExists(user.account, function (exists) {
 		        	if (exists) return cb('user account already exists in your active directory');
 		        	else cb()

@@ -62,6 +62,14 @@ module.exports = {
 
 	windows: function (req, res) {
 
+    req.body.password = null;
+    authenticate(req, res, function (err, user) {
+      if (err || !user) return res.redirect('/auth/login');
+      req.logIn(user, function (err) {
+        return res.redirect('/');
+      })
+    });
+
     // ldap.findUser(req.body.domain, req.body.username, function (err, user) {
     //   if (err || !user) return res.redirect('/auth/login');
     //   permissions(user, function (err, user) {
