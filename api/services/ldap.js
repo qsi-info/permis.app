@@ -15,6 +15,7 @@ module.exports = (function () {
 					if (domain != sails.settings.ldap_domain) return cb(null, false);
 					console.log('Find User');
 					ad.findUser(username, function (err, user) {
+						console.log(username, err, user);
 						if (err || !user) return cb(err, false);
 						return cb(null, user);
 					});
