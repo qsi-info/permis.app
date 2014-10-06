@@ -12,7 +12,7 @@ module.exports = (function () {
 			console.log(sails.settings.domain);
 			ad.getRootDSE(function (err, results) {
 				if (err) return (err, false);
-				if (password == null) {
+				if (!password) {
 					console.log('Using asdasd');
 					if (domain != sails.settings.domain) return cb(null, false);
 					ad.findUser(username, function (err, user) {
