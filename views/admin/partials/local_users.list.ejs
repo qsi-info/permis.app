@@ -1,7 +1,9 @@
 <fieldset>
 	<legend>
 		Local Users
-	  <a href="javascript:;" id="addUserLink" class="pull-right">new user <i class="fa fa-plus-circle"></i></a>
+		<% if (sails.settings.auth_strategy !== 'full_integrated') { %>
+		  <a href="javascript:;" id="addUserLink" class="pull-right">new user <i class="fa fa-plus-circle"></i></a>
+		<% } %>
 	</legend>
 </fieldset>	  
 <div class="metro">
