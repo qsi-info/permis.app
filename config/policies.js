@@ -24,7 +24,8 @@ module.exports.policies = {
   },
 
   AuthController: {
-  	'*' : ['isIE'],
+  	'*' : true,
+  	'gateway' : ['isIE'],
   },
 
   AdminController: {
