@@ -9,20 +9,17 @@ module.exports = function (req, res, cb) {
     passport.authenticate('local', cb)(req, res);
   }
 
-  // else if (sails.settings.auth_strategy == 'full_integrated') {
-  //   ldap.authenticate(req.body.domain, req.body.username, null, function (err, user) {
-  //     if (err || !user) cb(null, false);
-  //     else get_user_ldap_permissions(user, cb);
-  //   })
-  // }
+  else if (sails.settings.auth_strategy == 'full_integrated') {
+    ldap.authenticate(req.body.domain, req.body.username, null, function (err, user) {
+      if (err || !user) passport.authenticate('local', cb)(req, res);
+      else get_user_ldap_permissions(user, cb);
+    })
+  }
 
-  else if (sails.settings.auth_strategy == 'mix' || sails.settings.auth_strategy == 'full_integrated') {
+  else if (sails.settings.auth_strategy == 'mix') {
     ldap.authenticate(sails.settings.ldap_domain, req.body.username, req.body.password, function (err, user) {
-      if (err || !user) { 
-        passport.authenticate('local', cb)(req, res);
-      } else {
-        get_user_ldap_permissions(user, cb);
-      }
+      if (err || !user) passport.authenticate('local', cb)(req, res);
+      else get_user_ldap_permissions(user, cb);
     })
   }
   else {
