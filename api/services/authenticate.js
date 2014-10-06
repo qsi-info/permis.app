@@ -9,18 +9,22 @@ module.exports = function (req, res, cb) {
     passport.authenticate('local', cb)(req, res);
   }
 
-  else if (sails.settings.auth_strategy == 'full_integrated') {
-    console.log('User full_integrated');
-    console.log(req.body);
-    console.log(sails.settings);
-    ldap.authenticate(req.body.domain, req.body.username, undefined, function (err, user) {
-      if (err || !user) passport.authenticate('local', cb)(req, res);
-      else get_user_ldap_permissions(user, cb);
-    })
-  }
+  // else if (sails.settings.auth_strategy == 'full_integrated') {
+  //   console.log('User full_integrated');
+  //   console.log(req.body);
+  //   console.log(sails.settings);
+  //   var domain = typeof req.body.domain !== 'undefined' ? req.body.domain : sails.settings.ldap_domain;
 
-  else if (sails.settings.auth_strategy == 'mix') {
-    ldap.authenticate(sails.settings.ldap_domain, req.body.username, req.body.password, function (err, user) {
+  //   ldap.authenticate(domain, req.body.username, undefined, function (err, user) {
+  //     if (err || !user) passport.authenticate('local', cb)(req, res);
+  //     else get_user_ldap_permissions(user, cb);
+  //   })
+  // }
+
+  else if (sails.settings.auth_strategy == 'mix' || sails.settings.auth_strategy == 'full_integrated') {
+    var domain = typeof req.body.domain !== 'undefined' ? req.body.domain : sails.settings.ldap_domain;
+    var password = typeof req.body.password;
+    ldap.authenticate(domain, req.body.username, password, function (err, user) {
       if (err || !user) passport.authenticate('local', cb)(req, res);
       else get_user_ldap_permissions(user, cb);
     })

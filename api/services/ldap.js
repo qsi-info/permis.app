@@ -13,7 +13,7 @@ module.exports = (function () {
 			ad.getRootDSE(function (err, results) {
 				if (err) return (err, false);
 				if (!password) {
-					console.log('Using asdasd');
+					console.log('Using no password');
 					if (domain != sails.settings.ldap_domain) return cb(null, false);
 					ad.findUser(username, function (err, user) {
 						if (err || !user) return cb(err, false);
