@@ -98,7 +98,9 @@ module.exports = {
 
 
   beforeValidation: function (attrs, done) {
-  	attrs.ie_integration = (!attrs.ie_integration) ? false : true;
+  	if (attrs.ie_integration) {
+	  	attrs.ie_integration = (attrs.ie_integration == 'on') ? true : false;
+  	}
   	done();
   },
 
