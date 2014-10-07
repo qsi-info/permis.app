@@ -1,0 +1,45 @@
+<div class="modal fade" id="ModalItemEdit" data-backdrop="static" data-keyboard="false"></div>
+
+
+<script type="text/x-handlebars-template" id="__ITEM_EDIT_TEMPLATE__">
+  <form action="javascript:;" method="put" data-id="{{values/id/value}}" data-model="{{model}}" id="ItemEditForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= __('Modal.Item.Edit') %></h3>
+        </div>
+        <div class="modal-body">
+
+        {{#each values}}
+
+        	{{#equal input/type 'text'}}
+	          <div class="form-group">
+	            <label for="item_{{@key}}">{{@key}}</label>
+	            <input type="text" 
+	                   class="form-control" 
+	                   required=""
+                     value="{{value}}"
+	                   id="item_{{@key}}"
+	                   name="{{@key}}"/>
+	          </div>
+	          {{/equal}}
+
+        {{/each}}
+
+        </div>
+        <div class="modal-footer">
+          <div class="createdAtupdatedAt">
+            <small>Created at {{values/createdAt/value}}</small><br/>
+            <small>Updated at {{values/updatedAt/value}}</small>
+          </div>
+
+          <button type="button" class="btn btn-danger" id="ItemDeleteButton" data-id="{{values/id/value}}" data-model="{{model}}"><%= __('Delete') %></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= __('Close') %></button>
+          <button type="button" class="btn btn-success" id="ItemEditButton"><%= __('Update') %></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</script>
+
+

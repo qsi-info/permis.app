@@ -34,7 +34,9 @@ module.exports.policies = {
 
   UserController: {
   	'*' : ['isAdmin'],
-  }
+  },
+
+  'item': ['createdBy', 'updatedBy'],
 
 
 };

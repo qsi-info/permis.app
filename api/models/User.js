@@ -10,7 +10,7 @@ module.exports = {
 
 
 	tableName: 'LocalUser',
-	
+	usage: 'admin',
 
   attributes: {
 

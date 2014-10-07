@@ -1,0 +1,38 @@
+<div class="modal fade" id="ModalItemCreate" data-backdrop="static" data-keyboard="false"></div>
+
+
+<script type="text/x-handlebars-template" id="__ITEM_CREATE_TEMPLATE__">
+  <form action="javascript:;" method="post" data-model="{{model}}" id="ItemCreateForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= __('Modal.Item.Create') %></h3>
+        </div>
+        <div class="modal-body">
+
+        {{#each inputs}}
+
+        	{{#equal type 'text'}}
+	          <div class="form-group">
+	            <label for="item_{{@key}}">{{@key}}</label>
+	            <input type="text" 
+	                   class="form-control" 
+	                   required=""
+	                   id="item_{{@key}}"
+	                   name="{{@key}}"/>
+	          </div>
+	          {{/equal}}
+
+        {{/each}}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= __('Close') %></button>
+          <button type="button" class="btn btn-success" id="ItemCreateButton"><%= __('Save') %></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</script>
+
+

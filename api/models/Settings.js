@@ -9,6 +9,7 @@
 module.exports = {
 
 	tableName: 'Settings',
+	usage: 'admin',
 
   attributes: {
 		
