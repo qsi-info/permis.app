@@ -16,12 +16,6 @@ module.exports.adapters = {
 
   'default': 'mssql',
 
-  // Persistent adapter for DEVELOPMENT ONLY
-  // (data is preserved when the server shuts down)
-  disk: {
-    module: 'sails-disk',
-    migrate: 'drop',
-  },
 
   // Eventually from configuration file.
   mssql: {
