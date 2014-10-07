@@ -9,7 +9,7 @@ module.exports = (function () {
 
 		authenticate: function (domain, username, password, cb) {
 			ad.getRootDSE(function (err, results) {
-				if (err) return (err, false);
+				if (err) return cb(err, false);
 				if (!password) {
 					if (domain != sails.settings.ldap_domain) return cb(null, false);
 					ad.findUser(username, function (err, user) {
