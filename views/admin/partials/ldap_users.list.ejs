@@ -6,7 +6,7 @@
 
   <% users.forEach(function (user) { %>
   <% if (user.provider == 'ldap') { %>
-    <a href="javascript:;" class="list" data-user="<%= user.id %>">
+    <a href="javascript:;" class="list ldap-user" data-user="<%= user.id %>">
       <div class="list-content">
         <span class="list-title"><%= user.displayName %></span>
         <span class="list-subtitle">account: <%= user.account %></span>
@@ -19,3 +19,26 @@
 
   </div>
 </div>
+
+
+<%- partial('./modal.user.ldap.ejs') %>
+
+
+<script type="text/javascript">
+window.addEventListener('load', function () {
+
+  $('.ldap-user').on('click', function (e) {
+    e.preventDefault();
+    $.get('/user/' + $(this).attr('data-user'), function (response) {
+      if (response.id) {
+        var source = $('#__MODAL_USER_LDAP__').html();
+        var template = Handlebars.compile(source);
+        $modal = $('#ModalLdapUser');
+        $modal.html(template(response));
+        $modal.modal('show');
+      }
+    })
+  })    
+
+})
+</script>

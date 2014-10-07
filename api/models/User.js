@@ -85,8 +85,8 @@ module.exports = {
 	},
 
 	beforeUpdate: function (user, cb) {
-		var bcrypt = require('bcrypt');
-		if (user.password !== '') {
+		if (user.password && user.password !== '') {
+			var bcrypt = require('bcrypt');
 		  bcrypt.genSalt(10, function(err, salt) {
 		    bcrypt.hash(user.password, salt, function(err, hash) {
 		    	if (err) return cb(err);
@@ -94,7 +94,10 @@ module.exports = {
 		    	cb();
 		    })
 		  })
+		} else {
+			cb();
 		}
+
 	},
 
 	findOrCreateLocalUser: function (user, done) {

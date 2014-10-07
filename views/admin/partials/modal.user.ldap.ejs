@@ -1,0 +1,53 @@
+<div class="modal qsi-alert fade" id="ModalLdapUser" data-backdrop="static" data-keyboard="false">
+
+</div>
+
+
+
+
+<script type="text/x-handlebars-template" id="__MODAL_USER_LDAP__">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= __('Modal.User.Edit') %></h3>
+        </div>
+        <div class="modal-body">
+
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td><%= __('User.DisplayName') %></td>
+                <td>{{displayName}}</td>
+              </tr>
+              <tr>
+                <td><%= __('User.Account') %></td>
+                <td>{{account}}</td>
+              </tr>
+              <tr>
+                <td><%= __('User.Mail') %></td>
+                <td>{{mail}}</td>
+              </tr>
+              <tr>
+                <td><%= __('User.Permission') %></td>
+                <td>{{permission_level}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <a href="javascript:;" class="password-link" data-id="{{id}}"><%= __('User.Password.Change') %></a>
+
+        </div>
+        <div class="modal-footer">
+          {{#if id}}
+          <div class="createdAtupdatedAt">
+            <small>Created at {{createdAt}}</small><br/>
+            <small>Updated at {{updatedAt}}</small>
+          </div>
+          {{/if}}
+          
+          <button type="button" class="btn btn-danger user-delete-button" data-id="{{id}}" data-dismiss="modal"><%= __('Delete') %></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= __('Close') %></button>
+        </div>
+      </div>
+    </div>
+</script>
