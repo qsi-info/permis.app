@@ -17,7 +17,7 @@ module.exports = {
   	// Authentification settings
   	auth_strategy: {
   		type: 'string',
-  		enum: ['full_integrated', 'local_db', 'mix'],
+  		enum: ['full_integrated', 'mix', 'local_db'],
   		required: true,
   	},
 

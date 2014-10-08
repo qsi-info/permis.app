@@ -33,22 +33,22 @@
 						</div>
 						<div class="radio">
 						  <label>
-						  	<% if (sails.settings.auth_strategy == 'local_db') { %>
-							    <input type="radio" name="auth_strategy" id="local" value="local_db" checked=""/>
-						  	<% } else { %>
-							    <input type="radio" name="auth_strategy" id="local" value="local_db"/>
-						  	<% } %>
-						    Local database only
-						  </label>
-						</div>
-						<div class="radio">
-						  <label>
 						  	<% if (sails.settings.auth_strategy == 'mix') { %>
 							    <input type="radio" name="auth_strategy" id="mix" value="mix" checked=""/>
 						  	<% } else { %>
 							    <input type="radio" name="auth_strategy" id="mix" value="mix"/>
 						  	<% } %>
 						    Mix (LDAP and local database)
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						  	<% if (sails.settings.auth_strategy == 'local_db') { %>
+							    <input type="radio" name="auth_strategy" id="local" value="local_db" checked=""/>
+						  	<% } else { %>
+							    <input type="radio" name="auth_strategy" id="local" value="local_db"/>
+						  	<% } %>
+						    Local database only
 						  </label>
 						</div>
 				  </div>
@@ -235,6 +235,7 @@ window.addEventListener('load', function () {
 		$('#ldapConfiguration input').prop('disabled', false).prop('required', true);		
 		$('#ldapUrl').prop('type', 'url');		
 	})
+
 
 
 	$('#submitSettingsButton').on('click', function (e) {
