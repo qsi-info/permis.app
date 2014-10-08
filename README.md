@@ -4,7 +4,7 @@
 - cd Application_Name
 - npm install
 - Change your database informations in config/adapters.js
-- Lift your sails server
+- Lift your sails server and go to http://localhost:1337/
 - Enter the default admin credentials: username: admin, password: admin
 - Configure the authentification settings
 - Enjoy
