@@ -18,6 +18,12 @@
 module.exports = {
     
   
+  count: function (req, res) {
+  	Item.count()
+  	.then(function (count) {
+  		return res.json({ count: count });
+  	});
+  },
 
 
   /**

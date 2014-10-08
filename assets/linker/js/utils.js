@@ -322,8 +322,8 @@ Handlebars.registerHelper('formatDate', function (date) {
   var date = new Date(date);
   var lang = typeof lang !== 'undefined' ? lang : 'en';
   switch (lang) {
-    case 'fr' : return moment(date).format("dddd, Do MMMM, h:mm a");
-    case 'en' : return moment(date).format("dddd, MMMM Do, h:mm a");
+    case 'fr' : return moment(date).format("Do MMMM, h:mm a");
+    case 'en' : return moment(date).format("MMMM Do, h:mm a");
   }
 });
 

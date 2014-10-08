@@ -29,8 +29,8 @@
         </div>
         <div class="modal-footer">
           <div class="createdAtupdatedAt">
-            <small>Created at {{values/createdAt/value}}</small><br/>
-            <small>Updated at {{values/updatedAt/value}}</small>
+            <small>Created by {{values/createdBy/value}} on {{formatDate values/createdAt/value}}</small><br/>
+            <small>Updated by {{values/updatedBy/value}} on {{formatDate values/updatedAt/value}}</small>
           </div>
 
           <button type="button" class="btn btn-danger" id="ItemDeleteButton" data-id="{{values/id/value}}" data-model="{{model}}"><%= __('Delete') %></button>

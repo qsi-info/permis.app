@@ -75,6 +75,12 @@ module.exports = {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
 
+
+	model: function (req, res) {
+		var model = req.param('model');
+		return res.view({ layout: 'admin.layout.ejs', model: sails.models[model] });
+	},
+
 	settings: function (req, res) {
 		return res.view({ layout: 'admin.layout.ejs' });
 	},
