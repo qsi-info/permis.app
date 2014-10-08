@@ -19,6 +19,11 @@ module.exports = {
   		defaultsTo: '',
   	},
 
+    isChecked: {
+      type: 'boolean',
+      defaultsTo: true,
+    },
+
   	createdBy: {
   		type: 'string',
   		required: true,
@@ -34,8 +39,13 @@ module.exports = {
   inputs: {
     title: {
       type: 'text',
+    },
+    isChecked: {
+      type: 'checkbox',
+      defaultsTo: true,
     }
-  }
+  },
+
 
 
 };

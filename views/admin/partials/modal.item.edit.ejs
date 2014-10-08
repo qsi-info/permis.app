@@ -12,17 +12,31 @@
 
         {{#each values}}
 
-        	{{#equal input/type 'text'}}
-	          <div class="form-group">
-	            <label for="item_{{@key}}">{{@key}}</label>
-	            <input type="text" 
-	                   class="form-control" 
-	                   required=""
+          {{#equal input/type 'text'}}
+            <div class="form-group">
+              <label for="item_{{@key}}">{{@key}}</label>
+              <input type="text" 
+                     class="form-control" 
+                     required=""
                      value="{{value}}"
-	                   id="item_{{@key}}"
-	                   name="{{@key}}"/>
-	          </div>
-	          {{/equal}}
+                     id="item_{{@key}}"
+                     name="{{@key}}"/>
+            </div>
+          {{/equal}}
+            
+          {{#equal input/type 'checkbox'}}
+            <div class="checkbox">
+              <label>
+              {{#if value}}
+                <input type="checkbox" name="{{@key}}" checked=""/>
+              {{else}}
+                <input type="checkbox" name="{{@key}}"/>
+              {{/if}}
+                {{@key}}  
+              </label>
+            </div>
+          {{/equal}}
+            
 
         {{/each}}
 

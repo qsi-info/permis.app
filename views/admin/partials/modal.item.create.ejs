@@ -23,6 +23,20 @@
 	          </div>
 	          {{/equal}}
 
+          {{#equal type 'checkbox'}}
+            <div class="checkbox">
+              <label>
+              {{#if defaultsTo}}
+                <input type="checkbox" name="{{@key}}" checked=""/>
+              {{else}}
+                <input type="checkbox" name="{{@key}}"/>
+              {{/if}}
+                {{@key}}  
+              </label>
+            </div>
+          {{/equal}}
+
+
         {{/each}}
 
         </div>

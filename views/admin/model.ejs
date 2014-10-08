@@ -109,9 +109,14 @@ window.addEventListener('load', function () {
     if ($form.parsley().validate()) {
       var values = {};
       $form.find('[name]').each(function() {
-        values[this.name] = $(this).val();
+        if ($(this).attr('type') == 'checkbox') {
+          values[this.name] = $(this).is(':checked') ? 1 : 0;
+        } else {
+          values[this.name] = $(this).val();
+        }
       });
       $.post('/' + $form.attr('data-model'), values, function (response) {
+        console.log(response);
         window.location.reload();
       })
     }
@@ -152,7 +157,11 @@ window.addEventListener('load', function () {
     if ($form.parsley().validate()) {
       var values = {};
       $form.find('[name]').each(function() {
-        values[this.name] = $(this).val();
+        if ($(this).attr('type') == 'checkbox') {
+          values[this.name] = $(this).is(':checked') ? 1 : 0;
+        } else {
+          values[this.name] = $(this).val();
+        }
       });
       $.ajax({
         type: 'PUT',
