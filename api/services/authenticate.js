@@ -5,7 +5,7 @@ var Q = require('q');
 
 module.exports = function (req, res, cb) {
 
-  else if (!sails.settings || sails.settings.auth_strategy == 'local_db') {
+  if (!sails.settings || sails.settings.auth_strategy == 'local_db') {
     passport.authenticate('local', cb)(req, res);
   }
 
