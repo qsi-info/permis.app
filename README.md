@@ -1,7 +1,7 @@
 # QSI - Base Application
 ## Installation
-- git clone https://github.com/qsi-info/base.app.git <Application_Name>
-- cd <Application_Name>
+- git clone https://github.com/qsi-info/base.app.git Application_Name
+- cd Application_Name
 - npm install
 - Change your database informations in config/adapters.js
 - Lift your sails server
