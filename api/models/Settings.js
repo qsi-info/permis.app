@@ -61,6 +61,13 @@ module.exports = {
 			defaultsTo: true,
 		},
 
+		everyone_permission_level: {
+			type: 'string',
+			required: true,
+			defaultsTo: 'none',
+			enum: ['none', 'view', 'contribute', 'edit'],
+		},
+
 
 		// App settings
 		app_name: {

@@ -11,7 +11,7 @@
 
 
 
-	<form method="post" action="/admin/settings/update" data-parsley-validate="" id="setupForm">
+	<form method="post" action="/admin/settings/update" data-parsley-validate="" class="form" id="setupForm">
 
 
 		<div class="row">
@@ -77,17 +77,45 @@
 				  	</div>
 				  </div>
 
-			    <div class="checkbox">
-				    <label>
-				    	<% if (sails.settings.ie_integration) { %> 
-					      <input type="checkbox" name="ie_integration" checked=""/>
-				    	<% } else { %>
-					      <input type="checkbox" name="ie_integration"/>
-				    	<% } %>
-							IE Integration				    	
-				    </label>
+				  <div class="form-group">
+					  <label>Everyone permission level</label><br/>
+					  <select name="everyone_permission_level">
+					  	<% if (sails.settings.everyone_permission_level == 'none') { %> 
+						  	<option value="none" selected="">None</option>
+					  	<% } else { %>
+						  	<option value="none">None</option>
+					  	<% } %>
+					  	<% if (sails.settings.everyone_permission_level == 'view') { %> 
+						  	<option value="view" selected="">View</option>
+					  	<% } else { %>
+						  	<option value="view">View</option>
+					  	<% } %>
+					  	<% if (sails.settings.everyone_permission_level == 'contribute') { %> 
+						  	<option value="contribute" selected="">Contribute</option>
+					  	<% } else { %>
+						  	<option value="contribute">Contribute</option>
+					  	<% } %>
+					  	<% if (sails.settings.everyone_permission_level == 'edit') { %> 
+						  	<option value="edit" selected="">Edit</option>
+					  	<% } else { %>
+						  	<option value="edit">Edit</option>
+					  	<% } %>
+					  </select>
 				  </div>
 
+				  <div class="form-group">
+				  	<label>Options</label>
+				    <div class="checkbox">
+					    <label>
+					    	<% if (sails.settings.ie_integration) { %> 
+						      <input type="checkbox" name="ie_integration" checked=""/>
+					    	<% } else { %>
+						      <input type="checkbox" name="ie_integration"/>
+					    	<% } %>
+								IE Integration				    	
+					    </label>
+					  </div>		
+				  </div>
 
 				</fieldset>
 			</div>

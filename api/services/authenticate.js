@@ -68,15 +68,15 @@ function get_user_ldap_permissions (user, cb) {
 
     Q.all(promises).then(function (memberships) {
       console.log(memberships);
-      if (memberships[0]) {
+      if (memberships[0] || sails.settings.everyone_permission_level == 'edit') {
         user.permission_level = 'edit';
         User.findOrCreateLocalUser(user, cb);
       } 
-      else if (memberships[1]) {
+      else if (memberships[1] || sails.settings.everyone_permission_level == 'contribute') {
         user.permission_level = 'contribute';
         User.findOrCreateLocalUser(user, cb);
       } 
-      else if (memberships[2]) {
+      else if (memberships[2] || sails.settings.everyone_permission_level == 'view') {
         user.permission_level = 'view';
         User.findOrCreateLocalUser(user, cb);
       }
