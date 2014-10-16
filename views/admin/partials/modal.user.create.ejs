@@ -19,11 +19,16 @@
 
           <div class="form-group">
             <label for="account"><%= __('User.Account') %></label>
-            <input type="text" 
-                   class="form-control" 
-                   id="account" 
-                   required=""
-                   name="account"/>
+            <div class="input-group">
+              <input type="text" 
+                     class="form-control" 
+                     id="account" 
+                     required=""
+                     name="account"/>
+              <span class="input-group-addon">
+                @local
+              </span>
+           </div>
           </div>
 
           <div class="form-group">

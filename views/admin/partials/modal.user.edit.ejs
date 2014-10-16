@@ -46,6 +46,15 @@ window.addEventListener('load', function () {
         </div>
         <div class="modal-body">
 
+          <div class="form-group">
+            <label for=""><%= __('User.Account') %></label>
+            <input type="text" 
+                   class="form-control" 
+                   required=""
+                   disabled="disabled"
+                   value="{{account}}"/>
+          </div>
+
 
           <div class="form-group">
             <label for="displayName"><%= __('User.DisplayName') %></label>
@@ -56,6 +65,7 @@ window.addEventListener('load', function () {
                    value="{{displayName}}"
                    name="displayName"/>
           </div>
+
 
           <div class="form-group">
             <label for="email"><%= __('User.Email') %></label>

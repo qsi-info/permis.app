@@ -69,19 +69,12 @@ window.addEventListener('load', function () {
 	$('#addUserLink').on('click', function (e) {
 		e.preventDefault();
 		$modal = $('#ModalUserCreate');
+		$('#userCreateForm').parsley().reset();
+		$('#userCreateForm')[0].reset();
 		$modal.modal('show');		
 	})
 
 })
 </script>
-
-
-
-
-
-
-
-
-
 
 
