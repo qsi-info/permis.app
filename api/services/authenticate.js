@@ -5,7 +5,11 @@ var Q = require('q');
 
 module.exports = function (req, res, cb) {
 
-  if (!sails.settings || sails.settings.auth_strategy == 'local_db') {
+  if (req.body.username == '' || req.body.password == '') {
+    cb(null, false);
+  }
+
+  else if (!sails.settings || sails.settings.auth_strategy == 'local_db') {
     passport.authenticate('local', cb)(req, res);
   }
 
@@ -44,73 +48,45 @@ module.exports = function (req, res, cb) {
 function get_user_ldap_permissions (user, cb) {
   // Check group permission
 
+  var promises = [];
 
-    var promises = [];
 
+  var deferredEdit = Q.defer();
+  ldap.isMemberOf(user.sAMAccountName, sails.settings.edit_group, function (isMember) {
+    deferredEdit.resolve(isMember);
+  });
+  promises.push(deferredEdit.promise)
 
-    var deferredEdit = Q.defer();
-    ldap.isMemberOf(user.sAMAccountName, sails.settings.edit_group, function (isMember) {
-      deferredEdit.resolve(isMember);
-    });
-    promises.push(deferredEdit.promise)
+  var deferredContribute = Q.defer();
+  ldap.isMemberOf(user.sAMAccountName, sails.settings.contribute_group, function (isMember) {
+    deferredContribute.resolve(isMember);
+  });
+  promises.push(deferredContribute.promise)
 
-    var deferredContribute = Q.defer();
-    ldap.isMemberOf(user.sAMAccountName, sails.settings.contribute_group, function (isMember) {
-      deferredContribute.resolve(isMember);
-    });
-    promises.push(deferredContribute.promise)
+  var deferredView = Q.defer();
+  ldap.isMemberOf(user.sAMAccountName, sails.settings.view_group, function (isMember) {
+    deferredView.resolve(isMember);
+  });
+  promises.push(deferredView.promise)
 
-    var deferredView = Q.defer();
-    ldap.isMemberOf(user.sAMAccountName, sails.settings.view_group, function (isMember) {
-      deferredView.resolve(isMember);
-    });
-    promises.push(deferredView.promise)
-
-    Q.all(promises).then(function (memberships) {
-      console.log(memberships);
-      if (memberships[0] || sails.settings.everyone_permission_level == 'edit') {
-        user.permission_level = 'edit';
-        User.findOrCreateLocalUser(user, cb);
-      } 
-      else if (memberships[1] || sails.settings.everyone_permission_level == 'contribute') {
-        user.permission_level = 'contribute';
-        User.findOrCreateLocalUser(user, cb);
-      } 
-      else if (memberships[2] || sails.settings.everyone_permission_level == 'view') {
-        user.permission_level = 'view';
-        User.findOrCreateLocalUser(user, cb);
-      }
-      else cb(null, false);
-    })
-    .fail(function (err) {
-      console.log(err);
-    })
-
-  // ldap.isMemberOf(user.sAMAccountName, sails.settings.edit_group, function (isMember) {
-  //   if (isMember) {
-  //     user.permission_level = 'edit';
-  //     User.findOrCreateLocalUser(user, cb);
-  //   }
-  //   else {
-  //     ldap.isMemberOf(user.sAMAccountName, sails.settings.contribute_group, function (isMember) {
-  //       if (isMember) {
-  //         user.permission_level = 'contribute';
-  //         User.findOrCreateLocalUser(user, cb);
-  //       }
-  //       else {
-  //         ldap.isMemberOf(user.sAMAccountName, sails.settings.view_group, function (isMember) {
-  //           if (isMember) {
-  //             user.permission_level = 'view';
-  //             User.findOrCreateLocalUser(user, cb);
-  //           }
-  //           else {
-  //             cb(null, false);
-  //           }
-  //         });
-  //       }
-  //     })
-  //   }
-  // })   
+  Q.all(promises).then(function (memberships) {
+    if (memberships[0] || sails.settings.everyone_permission_level == 'edit') {
+      user.permission_level = 'edit';
+      User.findOrCreateLocalUser(user, cb);
+    } 
+    else if (memberships[1] || sails.settings.everyone_permission_level == 'contribute') {
+      user.permission_level = 'contribute';
+      User.findOrCreateLocalUser(user, cb);
+    } 
+    else if (memberships[2] || sails.settings.everyone_permission_level == 'view') {
+      user.permission_level = 'view';
+      User.findOrCreateLocalUser(user, cb);
+    }
+    else cb(null, false);
+  })
+  .fail(function (err) {
+    console.log(err);
+  })
 }
 
 
