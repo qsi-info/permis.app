@@ -24,7 +24,7 @@ module.exports.policies = {
   },
 
   AuthController: {
-  	'*' : true,
+  	'*' : ['setUserLocale'],
   	'gateway' : ['isIE'],
   },
 

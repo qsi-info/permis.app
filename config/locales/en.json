@@ -1,3 +1,13 @@
 {
+
+	"Account.Label" : "Account",
+	"Account.Placeholder" : "Enter your account",
+
+	"Password.Label" : "Password",
+	"Password.Placeholder" : "Enter your password",
+
+	"SignIn" : "Sign in",
+
+
   "Welcome": "Welcome"
 }
