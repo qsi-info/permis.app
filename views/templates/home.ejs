@@ -1,5 +1,35 @@
 	<div class="row">
-		<div class="col-md-12">
-			<h1><%= __('Welcome') %> <%= req.user.displayName %></h1>
+		<div class="col-md-12 metro">
+
+			<br/>
+			<br/>		
+
+			<a href="#/equipement">
+				<div class="tile double bg-green">
+				  <div class="tile-content icon">
+				  	<i class="fa fa-link"></i>
+				  </div>
+				  <div class="tile-status">
+				    <span class="name"><%= __('Link an equipement') %></span>
+				  </div>
+				</div>
+			</a>
+
+
+			<a href="javascript:;">
+				<div class="tile double ribbed-darkRed">
+				  <div class="tile-content icon">
+				  	<i class="fa fa-unlink"></i>
+				  </div>
+				  <div class="tile-status">
+				    <span class="name"><%= __('unlink an equipement') %></span>
+				  </div>
+				</div>
+			</a>
+
+
+
+
+
 		</div>
 	</div>

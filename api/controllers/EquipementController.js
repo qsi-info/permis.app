@@ -15,9 +15,40 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var Q = require('q');
+
+
 module.exports = {
     
   
+	available: function (req, res) {
+		Equipement.find()
+		.then(function (equipements) {
+			EquipementFiche.find()
+			.then(function (fiches) {
+
+				var availables_equipements = [];
+
+				for(var i=0, len=equipements.length; i < len; i++) {
+					var currentEquipement = equipements[i];
+					var j=0, jlen=fiches.length, isFound=false;
+					do {
+						var currentFiche = fiches[j];
+						if (currentFiche.Equipement_Code == currentEquipement.FUN_CODE) {
+							isFound = true;
+						}
+						j++;
+					} while(!isFound && j < jlen);
+					if (!isFound) {
+						availables_equipements.push(currentEquipement);
+					}
+				}
+
+				return res.json(availables_equipements);
+
+			})
+		})
+	},	
 
 
   /**
@@ -28,3 +59,12 @@ module.exports = {
 
   
 };
+
+
+
+
+
+
+
+
+

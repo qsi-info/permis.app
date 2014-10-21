@@ -3,9 +3,6 @@ application.controller('HomeController', function ($scope, $http, ItemFactory) {
 	init();
 
 	function init() {
-		ItemFactory.all().success(function (items) {
-			console.log(items);
-		})
 	}
 
 })
@@ -20,7 +17,7 @@ application.controller('EquipementListController', function ($scope, EquipementF
 
 	function init () {
 		$('body').addClass('loading');
-		EquipementFactory.all()
+		EquipementFactory.availables()
 		.success(function (equipements) {
 			$scope.equipements = equipements;
 			$('body').removeClass('loading');
@@ -35,14 +32,78 @@ application.controller('EquipementListController', function ($scope, EquipementF
 
 
 
-application.controller('EquipementShowController', function ($scope, $routeParams, EquipementFactory) {
+application.controller('EquipementShowController', function ($scope, $routeParams, $location, EquipementFactory, FicheFactory) {
 
 	init()
 
 	function init () {
-		EquipementFactory.find($routeParams.equipement_id).success(function (equipement) {
-			$scope.equipement = equipement[0];
+		$('body').addClass('loading');
+		EquipementFactory.find($routeParams.equipement_code).success(function (equipement) {
+			if (equipement.length > 0) {
+				$scope.equipement = equipement[0];				
+			}
+			FicheFactory.all().success(function (fiches) {
+				$scope.fiches = fiches;
+				$('body').removeClass('loading');
+				$('.sticker').sticky({ topSpacing: 75 });				
+				$('#ficheSearchInput').focus();			
+			});
+		});
+	};
+
+	$scope.go = function (path) {
+	  $location.path(path);
+	};	
+
+
+})
+
+
+
+
+application.controller('ConfirmationController', function ($scope, $routeParams, $location, EquipementFactory, FicheFactory, EquipementFicheFactory) {
+
+	init();
+
+	function init () {
+		$('body').addClass('loading');
+		EquipementFactory.find($routeParams.equipement_code).success(function (equipement) {
+			if (equipement.length > 0) {
+				$scope.equipement = equipement[0];				
+			}
+			FicheFactory.find($routeParams.fiche_id).success(function (fiche) {
+				$scope.fiche = fiche;
+				$('body').removeClass('loading');
+			});
+		});		
+	};
+
+
+	$scope.confirm = function () {
+		var fiche = {
+			Equipement_Code: $scope.equipement.FUN_CODE,
+			Equipement_Description: $scope.equipement.FUN_DESCR,
+			Niveau_Description: $scope.equipement.NIV1_DESCR,
+			Nom_Fichier: "\\parachemsrv07/" + $scope.fiche.DirName + $scope.fiche.LeafName,
+		}
+		EquipementFicheFactory.create(fiche).success(function (fiche) {
+			console.log(fiche);
+			$location.path('/home');
 		})
 	}
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+

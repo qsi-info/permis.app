@@ -1,7 +1,8 @@
-var application = angular.module('Application', ['ngRoute']);
+var application = angular.module('Application', ['ngRoute', 'ngAnimate']);
 
 
 application.config(function ($routeProvider) {
+
 
 	$routeProvider
 
@@ -16,13 +17,22 @@ application.config(function ($routeProvider) {
 		controller: 'EquipementListController',
 	})
 
-	.when('/equipement/:equipement_id', {
+	.when('/equipement/:equipement_code', {
 		templateUrl: '/_api/templates?template=equipement.show.ejs',
 		controller: 'EquipementShowController',
 	})
 
+	.when('/confirmation/:equipement_code/:fiche_id', {
+		templateUrl: '/_api/templates?template=confirmation.ejs',
+		controller: 'ConfirmationController',
+	})
+
 	// Default route
-	.otherwise({ redirectTo: '/equipement' })
+	.otherwise({ redirectTo: '/home' });
+
+
+
+
 
 })
 

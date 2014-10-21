@@ -1,10 +1,64 @@
-<div class="row">
-	<div class="col-md-6">
 		
 
-<h2>{{equipement.FUN_CODE}}</h2>
+<div class="row">
 
+	<div class="col-md-8">
+
+		<h3><%= __('Fiches de cadenassage') %></h3>	
+		<br/>
+		<input type="text" 
+	         id="ficheSearchInput" 
+	         ng-model="searchFiche" 
+	         placeholder="<%= __('Recherche une fiche') %>"
+	         class="form-control"/>
+		<br/>
+
+		<div class="metro">
+		  <div data-role="listview" class="listview-outlook" ng-repeat="fiche in fiches | filter:searchFiche">
+
+		    <a href="#/confirmation/{{equipement.FUN_CODE}}/{{fiche.Id}}" class="list" data-user="">
+		      <div class="list-content">
+		        <span class="list-title">{{fiche.LeafName}}</span>
+		        <span class="list-subtitle">{{fiche.DirName}}</span>
+		      </div>
+		    </a>
+
+		  </div>
+		</div>		
 
 
 	</div>
+
+	<div class="col-md-4">
+		<br/>
+		<br/>
+		<br/>
+
+		<div class="sticker hidden-sm hidden-xs" style="width: 400px !important">
+			<div class="panel panel-warning">
+			  <div class="panel-heading">
+			    <h4 class="panel-title">
+			    	<%= __('Equipement selectionné') %>
+						<button type="button" class="close" ng-click="go('/equipement')">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>			    	
+			    </h4>
+			  </div>
+			  <div class="panel-body">
+			  	<h4>{{equipement.FUN_CODE}}</h4>
+					<p>{{equipement.FUN_DESCR}}</p>
+					<p>{{equipement.NIV1_CODE}} | {{equipement.NIV1_DESCR}}</p>
+			  </div>			
+			</div>
+
+
+		</div>
+	</div>
+
+
+
 </div>
+	
+
+
+
