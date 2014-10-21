@@ -14,20 +14,42 @@
 
 module.exports.adapters = {
 
-  'default': 'mssql',
+  'default': 'guide_gestperm',
 
 
   // Eventually from configuration file.
-  mssql: {
+  guide_gestperm: {
     module: 'sails-mssql',
     user: 'SP_RO',
     password: 'password',
-    database: 'QSI_Test',
-    host: 'parachemsrv07',
+    database: 'GestPerm_Dev',
+    host: 'guidesrv01',
     port: 1433,
     schema: true,
     migrate: 'safe',
   },
+
+  guide_ti: {
+    module: 'sails-mssql',
+    user: 'SP_RO',
+    password: 'password',
+    database: 'GuideTI',
+    host: 'guidesrv01',
+    port: 1433,
+    schema: true,
+    migrate: 'safe',
+  },
+
+  sp_fiches: {
+    module: 'sails-mssql',
+    user: 'SP_RO',
+    password: 'password',
+    database: 'WSS_Content_ddbf1ff03a654576b875c43877771de2',
+    host: 'parachemsrv07',
+    port: 1433,
+    schema: true,
+    migrate: 'safe',    
+  }
 
 
 };
