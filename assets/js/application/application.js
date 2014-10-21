@@ -7,7 +7,7 @@ application.config(function ($routeProvider) {
 
 	// Home route
 	.when('/home', {
-		templateUrl: '/_api/templates/index',
+		templateUrl: '/_api/templates?template=home.ejs',
 		controller: 'HomeController'
 	})
 

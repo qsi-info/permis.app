@@ -18,7 +18,8 @@
 module.exports = {
     
   index: function (req, res) {
-    return res.view( { layout: 'empty.layout.ejs' });
+    var template = req.param('template');
+    return res.view('templates/' + template { layout: 'empty.layout.ejs' });
   },
 
 
