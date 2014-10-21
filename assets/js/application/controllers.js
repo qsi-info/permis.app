@@ -9,3 +9,40 @@ application.controller('HomeController', function ($scope, $http, ItemFactory) {
 	}
 
 })
+
+
+
+
+
+application.controller('EquipementListController', function ($scope, EquipementFactory) {
+
+	init();
+
+	function init () {
+		$('body').addClass('loading');
+		EquipementFactory.all()
+		.success(function (equipements) {
+			$scope.equipements = equipements;
+			$('body').removeClass('loading');
+			$('#equipementSearchInput').focus();
+		})
+	}
+ 
+});
+
+
+
+
+
+
+application.controller('EquipementShowController', function ($scope, $routeParams, EquipementFactory) {
+
+	init()
+
+	function init () {
+		EquipementFactory.find($routeParams.equipement_id).success(function (equipement) {
+			$scope.equipement = equipement[0];
+		})
+	}
+
+})

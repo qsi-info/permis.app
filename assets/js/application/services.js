@@ -16,3 +16,23 @@
 
  		return factory;
  })
+
+
+
+
+
+
+application.factory('EquipementFactory', function ($http) {
+	var factory = {};
+
+	factory.all = function () {
+		return $http.get('/equipement', { cache: true });
+	};
+
+	factory.find = function (id) {
+		return $http.get('/equipement', { params: { Expr1: id } });
+	};
+
+	return factory;
+
+})

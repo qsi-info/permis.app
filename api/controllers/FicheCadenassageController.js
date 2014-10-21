@@ -17,7 +17,12 @@
 
 module.exports = {
     
-  
+	production: function (req, res) {
+		FicheCadenassage.query("SELECT DirName, LeafName, Id from " + FicheCadenassage._tableName + " WHERE DirName LIKE 'gesdoc/Production/8.0 Fiches%'", function (err, fiches) {
+			if (err) return console.log(err);
+			return res.json(fiches); 
+		})
+	},
 
 
   /**

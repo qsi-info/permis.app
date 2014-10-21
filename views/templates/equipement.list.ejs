@@ -1,0 +1,26 @@
+
+<div class="row">
+	<div class="col-md-6">
+	<h2>Equipement.List</h2>	
+	<input type="text" id="equipementSearchInput" ng-model="searchEquipement" class="form-control"/>
+	<br/>
+
+<div class="metro">
+  <div data-role="listview" class="listview-outlook" ng-repeat="equipement in equipements | filter:searchEquipement">
+
+    <a href="#/equipement/{{equipement.Expr1}}" class="list" data-user="">
+      <div class="list-content">
+        <span class="list-title">{{equipement.FUN_CODE}}</span>
+        <span class="list-subtitle">{{equipement.FUN_DESCR}}</span>
+        <span class="list-remark">{{equipement.NIV1_CODE}} | {{equipement.NIV1_DESCR}}</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+
+
+
+	</div>
+</div>
