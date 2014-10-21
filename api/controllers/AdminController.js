@@ -27,7 +27,7 @@ module.exports = {
 	},
 
 	updateSettings: function (req, res) {
-		Settings.update(1, req.body)
+		Settings.update(sails.settings.id, req.body)
 		.then(function (settings) {
 			setup(settings[0]);
 			return res.redirect('/admin');

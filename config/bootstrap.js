@@ -16,10 +16,10 @@ module.exports.bootstrap = function (cb) {
 	.where({ account: 'admin' })
 	.then(function (admin) {
 		if (admin) {
-			Settings.findOne(1)
+			Settings.find()
 			.then(function (settings) {
-				if (!settings) return cb();	
-				setup(settings);
+				if (settings.length < 1) return cb();	
+				setup(settings[0]);
 				// sails.settings = settings;
 				// sails.config.appName = settings.app_name;
 				// ldap.configure(settings);
