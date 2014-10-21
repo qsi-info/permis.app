@@ -19,7 +19,7 @@ module.exports = {
     
   index: function (req, res) {
     var template = req.param('template');
-    return res.view('templates/' + template { layout: 'empty.layout.ejs' });
+    return res.view('templates/' + template, { layout: 'empty.layout.ejs' });
   },
 
 
