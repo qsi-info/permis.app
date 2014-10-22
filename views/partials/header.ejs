@@ -25,6 +25,11 @@
              <span class="caret"></span>
            </a>
           <ul class="dropdown-menu" role="menu">
+            <% if(req.user.permission_level == 'admin') { %> 
+            <li>
+              <a href="/admin">Admin Panel</a>
+            </li>
+            <% } %>
             <li>
               <a href="/auth/logout" id="logout"><%= __('Auth.Logout') %></a>
             </li>
