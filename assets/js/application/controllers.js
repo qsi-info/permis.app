@@ -100,6 +100,50 @@ application.controller('ConfirmationController', function ($scope, $routeParams,
 
 
 
+application.controller('UnlinkController', function ($scope, $location, EquipementFicheFactory) {
+
+	init()
+
+	function init () {
+		$('body').addClass('loading');
+		EquipementFicheFactory.all().success(function (links) {
+			$scope.links = links
+			$('body').removeClass('loading');
+			$('#ficheSearchInput').focus();			
+		})
+	}
+
+})
+
+
+
+application.controller('UnlinkConfirmationController', function ($scope, $location, $routeParams, EquipementFicheFactory) {
+
+	init()
+
+	function init () {
+		$('body').addClass('loading');
+		EquipementFicheFactory.find($routeParams.link_id).success(function (link) {
+			$scope.link = link
+			$('body').removeClass('loading');
+			$('#ficheSearchInput').focus();			
+		})
+	};
+
+
+	$scope.confirm = function () {
+		EquipementFicheFactory.delete($scope.link.id).success(function (link) {
+			$location.path('/home');
+		})
+	}
+
+})
+
+
+
+
+
+
 
 
 

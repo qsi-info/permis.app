@@ -51,6 +51,15 @@ module.exports = {
 	},	
 
 
+
+	// link: function (req, res) {
+	// 	Equipement.find()
+	// 	.then(function (equipements) {
+	// 		EquipementFiche.find()
+	// 	})
+	// },
+
+
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to EquipementController)

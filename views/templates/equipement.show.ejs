@@ -16,10 +16,11 @@
 		<div class="metro">
 		  <div data-role="listview" class="listview-outlook" ng-repeat="fiche in fiches | filter:searchFiche">
 
-		    <a href="#/confirmation/{{equipement.FUN_CODE}}/{{fiche.Id}}" class="list" data-user="">
+		    <a href="#/confirmation/{{equipement.Expr1}}/{{fiche.Id}}" class="list" data-user="">
 		      <div class="list-content">
 		        <span class="list-title">{{fiche.LeafName}}</span>
 		        <span class="list-subtitle">{{fiche.DirName}}</span>
+		        <!-- <span class="list-remark">{{fiche.Id}}</span> -->
 		      </div>
 		    </a>
 

@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 
 
-		<h3>Confirmation de l'association</h3>
+		<h3>Confirmation de dissociation</h3>
 
 
 		<div class="row">
@@ -11,28 +11,28 @@
 				<div class="panel panel-warning">
 				  <div class="panel-heading">
 				    <h4 class="panel-title">
-				    	<%= __('Equipement selectionné') %>
+				    	<%= __('Equipement associé') %>
 				    </h4>
 				  </div>
 				  <div class="panel-body">
-				  	<h4>{{equipement.FUN_CODE}}</h4>
-						<p>{{equipement.FUN_DESCR}}</p>
-						<p>{{equipement.NIV1_CODE}} | {{equipement.NIV1_DESCR}}</p>
+				  	<h4>{{link.Equipement_Code}}</h4>
+						<p>{{link.Equipement_Description}}</p>
+						<p>{{link.Niveau_Description}}</p>
 				  </div>			
-				</div>
+				</div>			
 
-				<div class="panel panel-primary">
+
+				<div class="panel panel-danger">
 				  <div class="panel-heading">
 				    <h4 class="panel-title">
-				    	<%= __('Fiche selectionnée') %>
+				    	<%= __('Fiche à dissocier') %>
 				    </h4>
 				  </div>
 				  <div class="panel-body">
-				  	<h4>{{fiche.LeafName}}</h4>
-						<p>{{fiche.DirName}}</p>
-						<p>Version: <span style="color: green">{{fiche.Version}}</span></p>
+				  	<p>{{link.Nom_Fichier}}</p>
 				  </div>			
-				</div>				
+				</div>			
+
 
 				<div class="pull-right">
 					<button ng-click="confirm()" class="btn btn-success">

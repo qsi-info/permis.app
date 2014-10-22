@@ -27,6 +27,16 @@ application.config(function ($routeProvider) {
 		controller: 'ConfirmationController',
 	})
 
+	.when('/unlink', {
+		templateUrl: '/_api/templates?template=equipement.unlink.ejs',
+		controller: 'UnlinkController',
+	})
+
+	.when('/unlink/confirmation/:link_id', {
+		templateUrl: '/_api/templates?template=unlink.confirmation.ejs',
+		controller: 'UnlinkConfirmationController'
+	})
+
 	// Default route
 	.otherwise({ redirectTo: '/home' });
 

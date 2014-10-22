@@ -1,0 +1,32 @@
+
+<div class="row">
+	<div class="col-md-12">
+	<h3><%= __('Equipements associés') %></h3>	
+  <br/>
+	<input type="text" 
+         id="ficheSearchInput" 
+         ng-model="searchEquipement" 
+         placeholder="<%= __('Recherchez un equipement') %>"
+         class="form-control"/>
+	<br/>
+
+<div class="metro">
+  <div data-role="listview" class="listview-outlook" ng-repeat="link in links | filter:searchEquipement">
+
+    <a href="#/unlink/confirmation/{{link.id}}" class="list">
+      <div class="list-content">
+        <span class="list-title">{{link.Equipement_Code}}</span>
+        <span class="list-subtitle">{{link.Equipement_Description}}</span>
+        <span class="list-remark">{{link.Niveau_Description}}</span>
+        <span class="list-remark">{{link.Nom_Fichier}}</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+
+
+
+	</div>
+</div>

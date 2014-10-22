@@ -16,9 +16,13 @@ body {
 }
 
 .close {
-  line-height: 20px;
+  line-height: 16px;
 }
 
+
+.navbar-brand {
+  font-size: 17px !important;
+}
 
 /* CUSTOM CLASS */
 .p-10 {

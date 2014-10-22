@@ -30,13 +30,14 @@ application.factory('EquipementFactory', function ($http) {
 	};
 
 	factory.find = function (code) {
-		return $http.get('/equipement', { params: { FUN_CODE: code }});
+		return $http.get('/equipement', { params: { Expr1: code }});
 	};
 
 
 	factory.availables = function () {
 		return $http.get('/equipement/available');
 	};
+
 
 	return factory;
 
@@ -53,6 +54,18 @@ application.factory('EquipementFicheFactory', function ($http) {
 
 	factory.create = function (fiche) {
 		return $http.post('/equipementfiche', fiche);
+	};
+
+	factory.find = function (id) {
+		return $http.get('/equipementfiche/' + id);
+	}
+
+	factory.all = function () {
+		return $http.get('/equipementfiche');
+	};
+
+	factory.delete = function (id) {
+		return $http.delete('/equipementfiche/' + id);
 	}
 
 	return factory;
