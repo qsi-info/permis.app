@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-10">
 	<h3><%= __('Choisissez un équipement à associer') %></h3>	
   <br/>
 	<input type="text" 
@@ -11,16 +11,14 @@
 	<br/>
 
 <div class="metro">
-  <div data-role="listview" class="listview-outlook" ng-repeat="equipement in equipements | filter:searchEquipement">
-
+  <div data-role="listview" class="listview-outlook" ng-repeat="equipement in equipements | filter:searchEquipement | orderBy:'NIV1_CODE'">
     <a href="#/equipement/{{equipement.Expr1}}" class="list" data-user="">
       <div class="list-content">
-        <span class="list-title">{{equipement.FUN_CODE}}</span>
-        <span class="list-subtitle">{{equipement.FUN_DESCR}}</span>
-        <span class="list-remark">{{equipement.NIV1_CODE}} | {{equipement.NIV1_DESCR}}</span>
+        <span style="display: inline;" class="list-title">{{equipement.FUN_CODE}}</span>
+        <span style="display: inline;" class="list-subtitle">{{equipement.FUN_DESCR}}</span>
+        <span style="display: inline;" class="list-remark">{{equipement.NIV1_DESCR}}</span>
       </div>
     </a>
-
   </div>
 </div>
 

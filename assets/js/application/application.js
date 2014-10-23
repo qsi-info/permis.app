@@ -42,7 +42,23 @@ application.config(function ($routeProvider) {
 
 
 
-
-
 })
+
+
+
+
+
+
+
+
+application.filter('ficheFormatUrl', function () {
+	return function (input) {
+		return input.replace(/\\/g, '/');
+	}
+})
+
+
+
+
+
 

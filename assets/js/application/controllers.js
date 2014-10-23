@@ -45,7 +45,7 @@ application.controller('EquipementShowController', function ($scope, $routeParam
 			FicheFactory.all().success(function (fiches) {
 				$scope.fiches = fiches;
 				$('body').removeClass('loading');
-				$('.sticker').sticky({ topSpacing: 75 });				
+				$('.sticker').sticky({ topSpacing: 100 });				
 				$('#ficheSearchInput').focus();			
 			});
 		});

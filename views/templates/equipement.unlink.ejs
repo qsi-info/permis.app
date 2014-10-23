@@ -15,12 +15,18 @@
 
     <a href="#/unlink/confirmation/{{link.id}}" class="list">
       <div class="list-content">
-        <span class="list-title">{{link.Equipement_Code}}</span>
-        <span class="list-subtitle">{{link.Equipement_Description}}</span>
-        <span class="list-remark">{{link.Niveau_Description}}</span>
+        <span style="display: inline;" class="list-title">{{link.Equipement_Code}}</span>
+        <span style="display: inline;" class="list-subtitle">{{link.Equipement_Description}}</span>
+        <span style="display: inline;" class="list-remark">{{link.Niveau_Description}}</span>
         <span class="list-remark">{{link.Nom_Fichier}}</span>
       </div>
     </a>
+    <div>
+      <a class="btn btn-sm btn-default pull-right see-document" 
+         target="_blank" 
+         href="http:{{link.Nom_Fichier | ficheFormatUrl}}">voir</a>
+    </div>
+
 
   </div>
 </div>

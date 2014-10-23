@@ -20,6 +20,12 @@ body {
 }
 
 
+.see-document {
+  position: relative;
+  top: -43px;
+  right: 5px;
+}
+
 .navbar-brand {
   font-size: 17px !important;
 }

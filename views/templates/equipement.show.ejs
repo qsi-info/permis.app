@@ -2,6 +2,30 @@
 
 <div class="row">
 
+	<div class="col-md-4">
+		<br/>
+		<br/>
+		<div class="sticker hidden-sm hidden-xs" style="width: 350px !important">
+			<div class="panel panel-warning">
+			  <div class="panel-heading">
+			    <h4 class="panel-title">
+			    	<%= __('Equipement selectionné') %>
+						<button type="button" class="close" ng-click="go('/equipement')">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>			    	
+			    </h4>
+			  </div>
+			  <div class="panel-body">
+			  	<h4>{{equipement.FUN_CODE}}</h4>
+					<p>{{equipement.FUN_DESCR}}</p>
+					<p>{{equipement.NIV1_CODE}} | {{equipement.NIV1_DESCR}}</p>
+			  </div>			
+			</div>
+
+
+		</div>
+	</div>	
+
 	<div class="col-md-8">
 
 		<h3><%= __('Choisissez une fiche de cadenassage') %></h3>	
@@ -23,6 +47,11 @@
 		        <!-- <span class="list-remark">{{fiche.Id}}</span> -->
 		      </div>
 		    </a>
+		    <div>
+					<a class="btn btn-sm btn-default pull-right see-document" 
+						 target="_blank" 
+						 href="http://parachemsrv07/{{fiche.DirName | ficheFormatUrl}}/{{fiche.LeafName| ficheFormatUrl}}">voir</a>
+		    </div>
 
 		  </div>
 		</div>		
@@ -30,31 +59,7 @@
 
 	</div>
 
-	<div class="col-md-4">
-		<br/>
-		<br/>
-		<br/>
 
-		<div class="sticker hidden-sm hidden-xs" style="width: 400px !important">
-			<div class="panel panel-warning">
-			  <div class="panel-heading">
-			    <h4 class="panel-title">
-			    	<%= __('Equipement selectionné') %>
-						<button type="button" class="close" ng-click="go('/equipement')">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>			    	
-			    </h4>
-			  </div>
-			  <div class="panel-body">
-			  	<h4>{{equipement.FUN_CODE}}</h4>
-					<p>{{equipement.FUN_DESCR}}</p>
-					<p>{{equipement.NIV1_CODE}} | {{equipement.NIV1_DESCR}}</p>
-			  </div>			
-			</div>
-
-
-		</div>
-	</div>
 
 
 
