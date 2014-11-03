@@ -30,7 +30,15 @@ application.factory('EquipementFactory', function ($http) {
 	};
 
 	factory.find = function (code) {
-		return $http.get('/equipement', { params: { Expr1: code }});
+		// return $http.get('/equipement', { params: {  }});
+		return $http({
+			url: '/equipement',
+			method: 'GET',
+			cache: false,
+			params: { 
+				Expr1: code,
+			},
+		});
 	};
 
 
