@@ -9,7 +9,7 @@
 			<div class="panel panel-warning">
 			  <div class="panel-heading">
 			    <h4 class="panel-title">
-			    	<%= __('Equipement selectionné') %>
+			    	<%= __('Equipement.Selected') %>
 						<button type="button" class="close" ng-click="go('/equipement')">
 							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 						</button>			    	
@@ -28,27 +28,27 @@
 
 	<div class="col-md-8">
 
-		<h3><%= __('Choisissez une fiche de cadenassage') %></h3>	
+		<h3><%= __('File.Choose') %></h3>	
 		<br/>
 		<input type="text" 
 	         id="ficheSearchInput" 
 	         ng-model="searchFiche" 
-	         placeholder="<%= __('Recherche une fiche') %>"
+	         placeholder="<%= __('File.Search') %>"
 	         class="form-control"/>
 		<br/>
 
 		<div class="metro">
-		  <div data-role="listview" class="listview-outlook" ng-repeat="fiche in fiches | filter:searchFiche">
+		  <div data-role="listview" class="listview-outlook" ng-repeat="fiche in fiches | filter:searchFiche | orderBy:'DirName'">
 
 		    <a href="#/confirmation/{{equipement.Expr1}}/{{fiche.Id}}" class="list" data-user="">
 		      <div class="list-content">
-		        <span class="list-title">{{fiche.LeafName}}</span>
-		        <span class="list-subtitle">{{fiche.DirName}}</span>
+		        <span style="display: inline;" class="list-title">{{fiche.LeafName}}</span>
+		        <span style="" class="list-subtitle">{{fiche.DirName}}</span>
 		        <!-- <span class="list-remark">{{fiche.Id}}</span> -->
 		      </div>
 		    </a>
-		    <div>
-					<a class="btn btn-sm btn-default pull-right see-document" 
+		    <div class="see-document">
+					<a class="btn btn-sm btn-default pull-right" 
 						 target="_blank" 
 						 href="http://parachemsrv07/{{fiche.DirName | ficheFormatUrl}}/{{fiche.LeafName| ficheFormatUrl}}">voir</a>
 		    </div>

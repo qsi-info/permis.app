@@ -1,17 +1,17 @@
 
 <div class="row">
 	<div class="col-md-12">
-	<h3><%= __('Choisissez une association') %></h3>	
+  <h3><%= __('Link.Choose') %></h3>  
   <br/>
 	<input type="text" 
          id="ficheSearchInput" 
          ng-model="searchEquipement" 
-         placeholder="<%= __('Recherchez une association') %>"
+         placeholder="<%= __('Link.Search') %>"
          class="form-control"/>
 	<br/>
 
 <div class="metro">
-  <div data-role="listview" class="listview-outlook" ng-repeat="link in links | filter:searchEquipement">
+  <div data-role="listview" class="listview-outlook" ng-repeat="link in links | filter:searchEquipement | orderBy:'Niveau_Description'">
 
     <a href="#/unlink/confirmation/{{link.id}}" class="list">
       <div class="list-content">
@@ -21,10 +21,10 @@
         <span class="list-remark">{{link.Nom_Fichier}}</span>
       </div>
     </a>
-    <div>
-      <a class="btn btn-sm btn-default pull-right see-document" 
+    <div class="see-document">
+      <a class="btn btn-sm btn-default pull-right" 
          target="_blank" 
-         href="http:{{link.Nom_Fichier | ficheFormatUrl}}">voir</a>
+         href="http:{{link.Nom_Fichier | ficheFormatUrl}}"><%= __('Look') %></a>
     </div>
 
 

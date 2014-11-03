@@ -1,6 +1,28 @@
 {
 
 
+	"Link.Confirm" : "Confirmez votre association",
+	"Link.Make" : "Faire une association",
+	"Link.Choose" : "Choisissez une association",
+	"Link.Search" : "Recherchez une association",
+
+
+	"Unlink" : "Dissocier",	
+	"Unlink.Confirm" : "Confirmez la dissociation",
+
+	"Confirm" : "Confirmez",
+	"Cancel" : "Annuler",
+	"Look" : "Voir",
+
+	"Equipement.Choose" : "Choisissez un équipement à associer",
+	"Equipement.Search" : "Recherchez un équipement",
+	"Equipement.Selected" : "Équipement sélectionné",
+	"Equipement.Link" : "Équipement associé",
+
+	"File.Choose" : "Choisissez une fiche de cadenassage",
+	"File.Search" : "Recherchez une fiche",
+	"File.Unlink" : "Fiche à dissocier",
+
 	"Account.Label" : "Compte",
 	"Account.Placeholder" : "Entrez votre nom de compte",
 

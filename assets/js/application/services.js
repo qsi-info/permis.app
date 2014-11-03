@@ -35,7 +35,12 @@ application.factory('EquipementFactory', function ($http) {
 
 
 	factory.availables = function () {
-		return $http.get('/equipement/available');
+		return $http({
+			url: '/equipement/available',
+			method: 'GET',
+			cache: false,
+			params: { 'ie_cache_prevention': new Date().getTime() },
+		});
 	};
 
 
