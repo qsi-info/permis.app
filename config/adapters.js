@@ -20,9 +20,9 @@ module.exports.adapters = {
   // Eventually from configuration file.
   guide_gestperm: {
     module: 'sails-mssql',
-    user: 'SP_RO',
-    password: 'password',
-    database: 'GestPerm_Dev',
+    user: 'GestPermAdm',
+    password: 'Password01',
+    database: 'GestPerm',
     host: 'guidesrv01',
     port: 1433,
     schema: true,

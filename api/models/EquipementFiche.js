@@ -6,6 +6,9 @@
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
 
+
+var uuid = require('uuid');
+
 module.exports = {
 
   tableName: 'Equipements_Fiches',
@@ -43,8 +46,7 @@ module.exports = {
   		required: true,
   	},    
 
+  },
 
-
-  }
 
 };

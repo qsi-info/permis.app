@@ -9,6 +9,7 @@
 module.exports = {
 
 	tableName: 'SP_Fichierdecadenassage',
+	tableName: 'Docs',
 	adapter: 'sp_fiches',
 
 	migrate: 'safe',
