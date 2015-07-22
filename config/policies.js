@@ -39,6 +39,9 @@ module.exports.policies = {
   // Add those policies for all models you want to perform CRUD 
   'item': ['isAuthenticated', 'applyPermissions', 'createdBy', 'updatedBy'],
   'equipementfiche': ['isAuthenticated', 'applyPermissions', 'createdBy', 'updatedBy'],
+  EquipementFicheController: {
+    find: true,
+  }
 
 };
 
